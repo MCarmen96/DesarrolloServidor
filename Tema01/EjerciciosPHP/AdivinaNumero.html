@@ -1,0 +1,60 @@
+<?php
+session_start();
+
+$mensaje = '';
+
+// Si no existe un número secreto o si se ha solicitado reiniciar el juego, se crea uno nuevo
+if (!isset($_SESSION['numero_secreto']) || isset($_POST['reiniciar'])) {
+    $_SESSION['numero_secreto'] = rand(1, 100);
+    $_SESSION['intentos'] = 0;
+    $_SESSION['juego_terminado'] = false;
+    $mensaje = '¡He pensado en un nuevo número! Adivínalo.';
+}
+
+// Se procesa la adivinanza solo si el juego no ha terminado
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['adivinanza']) && !$_SESSION['juego_terminado']) {
+    $adivinanza = (int) $_POST['adivinanza'];
+    $_SESSION['intentos']++;
+    
+    if ($adivinanza < $_SESSION['numero_secreto']) {
+        $mensaje = 'El número secreto es MAYOR.';
+    } elseif ($adivinanza > $_SESSION['numero_secreto']) {
+        $mensaje = 'El número secreto es MENOR.';
+    } else {
+        $mensaje = '¡Felicidades! Adivinaste el número ' . $_SESSION['numero_secreto'] . ' en ' . $_SESSION['intentos'] . ' intentos.';
+        $_SESSION['juego_terminado'] = true; // Marca el juego como terminado
+    }
+}
+?>
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Adivina el Número</title>
+</head>
+<body>
+    <h2>Adivina el Número</h2>
+    <p>Estoy pensando en un número entre 1 y 100. ¿Puedes adivinarlo?</p>
+
+    <?php if (!$_SESSION['juego_terminado']): ?>
+    <form method="post">
+        <label>Introduce tu adivinanza:</label><br>
+        <input type="number" name="adivinanza" min="1" max="100" required>
+        <button type="submit">Adivinar</button>
+    </form>
+    <?php endif; ?>
+
+    <p><strong><?= $mensaje ?></strong></p>
+    
+    <?php if ($_SESSION['juego_terminado']): ?>
+    <form method="post">
+        <button type="submit" name="reiniciar">Jugar de nuevo</button>
+    </form>
+    <?php endif; ?>
+
+    <hr>
+    
+    <p>Número de intentos: <?= $_SESSION['intentos'] ?></p>
+</body>
+</html>
