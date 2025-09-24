@@ -4,6 +4,7 @@ session_start();
 $mensaje = '';
 
 // Si no existe un número secreto o si se ha solicitado reiniciar el juego, se crea uno nuevo
+
 if (!isset($_SESSION['numero_secreto']) || isset($_POST['reiniciar'])) {
     $_SESSION['numero_secreto'] = rand(1, 100);
     $_SESSION['intentos'] = 0;
