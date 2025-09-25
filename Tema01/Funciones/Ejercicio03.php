@@ -5,6 +5,6 @@
 Llama a la funcion usando $multiplicar(3,4)
 */
 
-$multiplicar=function($num1,$num2){return $num1*$num2}
+$multiplicar=function($num1,$num2){return $num1*$num2;}
 
 echo $multiplicar(3,5);

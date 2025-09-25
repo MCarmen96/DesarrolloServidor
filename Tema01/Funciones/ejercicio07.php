@@ -10,5 +10,4 @@
     
     print_r($coonvertMayus($nombres));
 
-   
 ?>

@@ -6,7 +6,7 @@ function calcularPromedio($array):int{
     $leng=count($array);
     $suma=array_sum($leng,$array);
     $promedio=$suma/$leng;
-    return $promedio
+    return $promedio;
 
 }
 
@@ -18,7 +18,7 @@ $promedio=function ($array):int{
     $promedio=$suma/$leng;
     return $promedio;
 }
- echo "FUNCION ANONIMA EN VARIABLE ". $promedio($arrayNumbers);
+echo "FUNCION ANONIMA EN VARIABLE ". $promedio($arrayNumbers);
 
 $leng=count($arrayNumbers);
 $suma=array_sum($leng,$array);
