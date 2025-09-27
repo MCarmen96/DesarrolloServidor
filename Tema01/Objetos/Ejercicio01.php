@@ -7,9 +7,7 @@
 
         public function mostrarInfo(){
 
-            return "Info libro: ". $this->titulo . $this->autor . $this->year ."\n";        }
-
-
+            return "Info libro: {$this->titulo},{$this->autor},{$this->year}\n";        }
 
     }
 

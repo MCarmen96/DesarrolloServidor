@@ -1,9 +1,9 @@
-..<?php
+<?php
 
     class Persona{
 
         public $nombre;
-        protected $edad;
+        protected $edad; // SOLO accesible dentro de la propia clase o por clases hijas.
         private $pin;
 
         public function __construct($nombre,$edad,$pin){
@@ -15,13 +15,17 @@
         public function getPin(){
             return $this->pin;
         }
+        public function getEdad(){
+            return $this->edad;
+        }
 
     }
 
-    $persona1=new Persona();
+    $persona1=new Persona("albert",29,1111);
     $persona1->nombre="albert";
     
-    echo $persona1->getPin();
-    echo $persona1->getEdad();
 
+    echo "El PIN de " . $persona1->nombre . " es: " . $persona1->getPin() . "\n";
+    echo "La edad de " . $persona1->nombre . " es: " . $persona1->getEdad() . "\n";
+    
 ?>

@@ -1,3 +1,6 @@
+/*
+Crea una interfaz Prestable con los metodos: prestar(), devolver(), estaPrestado().
+Haz que la clase Libro la implemente, y gestiona con una propiedad booleana si esta prestado o no */
 <?php
 
 interface Prestable{

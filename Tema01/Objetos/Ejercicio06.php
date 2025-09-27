@@ -1,11 +1,5 @@
 <?php
-abstract class MaterialBiblioteca{
-    public $titulo;
-    public $autor;
-    public $year;
 
-    abstract
-}
 
 interface Prestable{
     function prestar();
@@ -23,7 +17,6 @@ class Libro implements Prestable{
 
     public function __construct($titulo, $autor, $year)
     {
-
         $this->titulo = $titulo;
         $this->autor = $autor;
         $this->year = $year;
@@ -47,6 +40,7 @@ class Libro implements Prestable{
             $this->prestado=true;
             echo "has prestado el libro durante una semana";
         }
+        
     }
     public function devolver(){}
     public function estaPrestado(){}

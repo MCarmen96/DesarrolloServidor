@@ -1,11 +1,17 @@
 /*
-    Crea una clase abatracta MaterialBiblioteca con:
-        Propiedades comunes (tirulo,autor,year).
-        UN metodo abtracto mostrarInfo().
-        Un metodo concreto esAntiguo() que devuelva true si el año es menor a 2000
-    Haz que libro y revista hereden de esta clase
+    Crea un trait identificable que aporte una propiedad id y los metodos setId y getId().
+    Haz que tanto libro como revsita usen este trait, y asigna un ID unico al crearlos.
 */
+
 <?php
+
+    trait Identificacion{
+        protected $id;
+
+        public function getId(){return $this->id;}
+        public function setId($id){$this->id=$id;}
+    }
+
 //clase abstracta
 abstract class MaterialBiblioteca{
 
@@ -44,7 +50,9 @@ interface Prestable{
 
 class Libro extends MaterialBiblioteca implements Prestable{ // usa los metodos de la interfaz
 
+    use Identificacion;
     public $prestado=false;
+
 
     public function __construct($titulo, $autor, $year)
     {
@@ -72,13 +80,13 @@ class Libro extends MaterialBiblioteca implements Prestable{ // usa los metodos 
     public function estaPrestado(){}
 
     //getters y setters
-    public function getTitulo(){}
+    public function getTitulo(){return $this->titulo;}
     public function setTitulo($titulo){$this->titulo=$titulo;}
 
-    public function getAutor(){}
+    public function getAutor(){return $this->autor;}
     public function setAutor($autor){$this->autor=$autor;}
 
-    public function getYear(){}
+    public function getYear(){return $this->year;}
     public function setYear($year){
 
         if($year>date("Y")){
