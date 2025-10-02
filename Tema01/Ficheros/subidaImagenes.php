@@ -1,6 +1,6 @@
 <?php
 
-$carpeta = "imagenes";
+$carpeta = "imagenes/";
 
 $tiposValidos = ["jpg", "jpeg", "png", "gif"];
 
@@ -10,35 +10,42 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_FILES["fileImagen"])) {
     $nombreArchi = $_FILES["fileImagen"]["name"];
     $tipo = $_FILES["fileImagen"]["type"];
     $tamanio = $_FILES["fileImagen"]["size"];
+    $error=$_FILES["fileImagen"]["error"];
 
     $carpetaSave = $carpeta . basename($nombreArchi);
 
     if (!file_exists($carpeta)) {
-        mkdir("imagenes");
+        mkdir("imagenes/");
     }
 
     
-    $badSize=1024*1024*6;
+    $badSize=1024*1024*2;
 
     if ($tamanio>$badSize) {
 
         echo "--ERROR EL ARCHIVO ES MAYOR A 2 MEGABYTE--";
 
     }else{
+        // guardo la extension del archivo
+        $extensionArchiSubido=strtolower(pathinfo($nombreArchi,PATHINFO_EXTENSION));
 
-        
+        if(in_array($extensionArchiSubido,$tiposValidos)){
 
-        if(in_array($tipo,$tiposValidos)){
-            echo "--TIPO VALIDO--";
-            echo "SUBO Y GUARDO ARCHIVO";
-            move_uploaded_file($nombreTemp, $carpetaSave);
+            echo $_FILES["fileImagen"]["type"]."--TIPO VALIDO--\n";
+            
+            if(move_uploaded_file($nombreTemp, $carpetaSave)){
+                echo "SUBO Y GUARDO ARCHIVO";
+            }else{
+
+                echo "ERROR EN LA SUBIDA $error";
+            }
         }else{
             
-            echo $_FILES["fileImagen"][""]."error de tipos";
+            echo $_FILES["fileImagen"]["type"]."error de tipos de archivos que no coinciden";
         }
     }
 
     
 }else{
-    echo "error ";
+    echo "erro no he recibido nada!! ";
 }
