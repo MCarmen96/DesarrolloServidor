@@ -1,0 +1,12 @@
+{
+    "name": "mariadelcarmengarcianavarro/composer",
+    "description": "PruebaComposer01",
+    "type": "project",
+    "license": "proprietary",
+    "autoload": {
+        "psr-4": {
+            "Mariadelcarmengarcianavarro\\Composer\\": "src/"
+        }
+    },
+    "require": {}
+}
