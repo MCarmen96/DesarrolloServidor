@@ -31,9 +31,19 @@ class HomeController
     {
         if (isset($data["nombre"]) && !empty($data["nombre"])) {
             $nombre = htmlspecialchars($data["nombre"]);
-            echo "<h1> Hola ${nombre}! Bienvenido a primera pagina.</h1>";
+            echo "<h1> Hola {$nombre}! Bienvenido a primera pagina.</h1>";
         } else {
             "<h1>Por favor introduce un nombre valido</h1>";
+        }
+    }
+
+    public function plantas(){
+        $filePath=__DIR__."/../Views/plantas.html";
+        if(file_exists($filePath)){
+            echo file_get_contents($filePath);
+        }else {
+            http_response_code(404);
+            echo "404 not Found";
         }
     }
 

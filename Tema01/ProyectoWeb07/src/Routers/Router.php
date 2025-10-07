@@ -17,6 +17,11 @@
         case "/sobreNosotros":
             echo $controllerHome->sobreNosotros();
             break;
+        case "/plantas":
+            $controllerHome->plantas();
+        case "/procesar":
+            $controllerHome->procesar($_POST);
+            break;
         default:
             http_response_code(404);
             echo "ERROR NO ENCONTRADO 404";
