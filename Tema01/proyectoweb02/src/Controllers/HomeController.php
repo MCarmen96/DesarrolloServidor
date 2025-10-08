@@ -43,7 +43,7 @@ class HomeController
             echo file_get_contents($filePath);
         }else {
             http_response_code(404);
-            echo "404 not Found";
+            echo "404 not Found plantas";
         }
     }
 
