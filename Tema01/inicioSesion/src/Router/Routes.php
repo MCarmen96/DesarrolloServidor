@@ -15,6 +15,7 @@ class gestorRutas
     {
 
         $this->rutas["/"] = ["controller" => "HomeController", "action" => "mostrarForm"];
+        $this->rutas["/procesar"]=["controller"=>"HomeController","action"=>"procesar"];
     }
 
     public function gestorPeticion()
@@ -31,7 +32,11 @@ class gestorRutas
 
             if (class_exists($controllerClass) && method_exists($controllerClass, $action)) {
                 $controller = new $controllerClass();
-                $controller->$action();
+                if($_SERVER["REQUEST_METHOD"]==="POST"){
+                    $controller->$action($_POST);
+                }else{
+                    $controller->$action();
+                }
             } else {
                 http_response_code(404);
                 echo "NOT FOUND 40 dshfsd";

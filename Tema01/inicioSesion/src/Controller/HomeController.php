@@ -17,22 +17,50 @@ class HomeController{
 
     public function procesar($datos){
         $patronNombre='/^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\s-]+$/';
+        $patronPin='/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^a-zA-Z\d\s]).{8,}$/';
+        $nombreOk=false;
+        $pinOk=false;
+        $emailOk=false;
+        $errores=[];
         
         if(isset($datos["name"])&&!empty($datos["name"])&&preg_match($patronNombre,$datos["name"])){
-
+            $nombreOk=true;
+            
+        }else{
+            $nombreError="<li>Nombre NO valido</li>";
+            array_push($errores,$nombreError);
         }
 
-        if(isset($datos["name"])&&isset($datos["pin"])&&isset($datos["email"])){
-            if(empty($datos["name"])){
-                echo "<h2>EL nombre no puede estar vacio!!</h2>";
-            }else if(empty($datos["pin"])){
-                echo "<h2>EL pin no puede estar vacio!!</h2>";
-            }else if(empty($datos["email"])){
-                echo "<h2>El email no puede estar vacio</h2>";
-            }else{
+        if(isset($datos["pin"])&&!empty($datos["pin"])&&preg_match($patronPin,$datos["pin"])){
+            $pinOk=true;
+    
+        }else{
+            $pinError="<li>Pin NO valido</li>";
+            array_push($errores,$pinError);
+        }
 
+        if(isset($datos["email"])&&!empty($datos["email"])&&filter_var($datos["email"],FILTER_VALIDATE_EMAIL)){
+            $emailOk=true;
+        }else{
+            $emailError="<li>Email NO valido!!</li>";
+            array_push($errores,$emailError);
+        }
+
+        if($nombreOk&&$emailOk&&$pinOk){
+            $filePath=__DIR__."/../Views/exitoInicio.html";
+            if(file_exists($filePath)){
+                echo file_get_contents($filePath);
+            }else {
+            http_response_code(404);
+            echo "404 not Found plantas";
             }
+        }else{
+            foreach($errores as $error){
+                echo "<ul>$error</ul> <br>";
+            }
+            
         }
+
     }
 
     
