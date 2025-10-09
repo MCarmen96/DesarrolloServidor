@@ -1,0 +1,12 @@
+{
+    "name": "carmen/iniciosesion",
+    "autoload": {
+        "psr-4": {
+            "carmen\\iniciosesion\\": "src/"
+        }
+    },
+    "require": {},
+    "scripts":{
+        "start":"php -S localhost:8080 -t public"
+    }
+}
