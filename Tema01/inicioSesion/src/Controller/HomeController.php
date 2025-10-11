@@ -27,8 +27,7 @@ class HomeController{
             $nombreOk=true;
             
         }else{
-            $nombreError="<li>Nombre NO valido</li>";
-            array_push($errores,$nombreError);
+            array_push($errores,"<li>Nombre NO valido</li>");
         }
 
         if(isset($datos["pin"])&&!empty($datos["pin"])&&preg_match($patronPin,$datos["pin"])){
@@ -58,7 +57,7 @@ class HomeController{
             foreach($errores as $error){
                 echo "<ul>$error</ul> <br>";
             }
-            
+        
         }
 
     }
