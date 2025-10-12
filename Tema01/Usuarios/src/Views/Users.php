@@ -8,7 +8,7 @@
 <body>
     <h1>LISTA DE USUARIOS</h1>
     <ul>
-            <?=$fileUsers?>
+        <?=$fileUsers?>
     </ul>
     <hr>
     <form action="/viewForm" method="post">
@@ -16,6 +16,7 @@
             <input type="text" name="nameUser">
         </label>
         <button type="submit">Enviar</button>
+        
     </form>
 </body>
 </html>

@@ -18,7 +18,7 @@ class HomeController
                 $fileOpen=fopen($file,"a");
                 while (($line = fgets($fileOpen)) !== false) {
 
-                    $fileUsers .="<li>$line</li>";
+                    $fileUsers .="<li>$line</li><a href=\"/\">Delete</a>";
                 
                 }
 
