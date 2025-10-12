@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1 style="text-align: center;">--Form data--</h1>
+    <form action="/dataProcess" method="post" enctype="multipart/form-data">
+        <div>
+            <label for="">
+                Name
+                <input type="text" name="nameUser">
+            </label>
+            <label for="">
+                Last Name
+                <input type="text" name="LastNameUser">
+            </label>
+            <label for="">
+                Phone
+                <input type="number" name="phoneNumber">
+            </label>
+
+            <label for="">
+                Email
+                <input type="email" name="email">
+            </label>
+
+            <label for="">
+                Letter o introduction
+                <input type="file" name="letter">
+            </label>
+        </div>
+        <button type="submit">Send</button>
+    </form>
+</body>
+
+</html>

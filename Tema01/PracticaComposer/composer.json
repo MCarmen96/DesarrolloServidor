@@ -1,0 +1,19 @@
+{
+    "name": "carme/practicacomposer",
+    "description": "Actividad para practicar para examen",
+    "autoload": {
+        "psr-4": {
+            "carme\\practicacomposer\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "MCarmen",
+            "email": "carmengarcianavarro19@gmail.com"
+        }
+    ],
+    "require": {},
+    "scripts": {
+        "start":"php -S localhost:2020 -t public"
+    }
+}
