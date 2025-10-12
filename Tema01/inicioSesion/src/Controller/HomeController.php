@@ -16,6 +16,7 @@ class HomeController{
     }
 
     public function procesar($datos){
+        
         $patronNombre='/^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\s-]+$/';
         $patronPin='/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^a-zA-Z\d\s]).{8,}$/';
         $nombreOk=false;
@@ -54,9 +55,12 @@ class HomeController{
             echo "404 not Found plantas";
             }
         }else{
+
             foreach($errores as $error){
                 echo "<ul>$error</ul> <br>";
             }
+
+            echo "<a href=\"/\"> Volver a inicio</a>";
         
         }
 

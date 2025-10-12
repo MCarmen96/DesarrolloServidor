@@ -9,14 +9,13 @@ class HomeController
     {
         $filePath = __DIR__ . "/../Views/Users.php";
         if (file_exists($filePath)) {
-            $fileUsers = "";
             
+            $fileUsers = "";
             $file = __DIR__."/../Database/listUser.txt";
 
             if (file_exists($file)) {
 
-                $fileOpen=fopen($file,"r");
-
+                $fileOpen=fopen($file,"a");
                 while (($line = fgets($fileOpen)) !== false) {
 
                     $fileUsers .="<li>$line</li>";
