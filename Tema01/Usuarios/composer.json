@@ -2,7 +2,7 @@
     "name": "carmen/usuarios",
     "autoload": {
         "psr-4": {
-            "carmen\\Usuarios\\": "src/"
+            "carmen\\usuarios\\": "src/"
         }
     },
     "authors": [

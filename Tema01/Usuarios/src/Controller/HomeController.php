@@ -1,44 +1,50 @@
 <?php
 
-namespace carmen\usuarios\Controller;
+namespace carmen\usuarios\Controller\HomeController;
+
+use carmen\usuarios\Models\UserModel;
 
 class HomeController
 {
+    private $userModel;
+    public function __construct()
+    {
+        $this->userModel=new UserModel();
+    }
 
     public function viewForm()
-    {
-        $filePath = __DIR__ . "/../Views/Users.php";
-        if (file_exists($filePath)) {
+    {   
+        $usuarios=$this->userModel->getNames();
+
+        $content="<h1>Listas nombres</h1>";
+
+        for ($i=0; $i < count($usuarios); $i++) { 
             
-            $fileUsers = "";
-            $file = __DIR__."/../Database/listUser.txt";
-
-            if (file_exists($file)) {
-
-                $fileOpen=fopen($file,"a");
-                while (($line = fgets($fileOpen)) !== false) {
-
-                    $fileUsers .="<li>$line</li><a href=\"/\">Delete</a>";
-                
-                }
-
-                fclose($fileOpen);
-
-                ob_start();
-
-                require $filePath;
-                echo ob_get_clean();
-
-
-            } else {
-                http_response_code(404);
-                echo "NOT FOUND FILE 404";
-            }
-
-        } else {
-            http_response_code(404);
-            echo "NOT FOUND 404";
+            $content.="<li>{$usuarios[$i]}</li>";
         }
+
+        $content.= " <hr>  <form action='/addNewUser' method='post'>
+        <label for=''>Introduce un nombre
+            <input type='text' name='nameUser'>
+        </label>
+        <button type='submit'>Enviar</button>
+        </form> ";
+
+        echo $content;
     }
+
+    public function addNewUsers($datos){
+        
+        $nombreLimpio=htmlspecialchars($datos["nameUser"]);
+        $this->userModel->writeFile($nombreLimpio);
+
+        echo "<h1>Bienvenido {$nombreLimpio}</h1>";
+        echo "<a href="/">Volver al inicio</a>";
+
+    }
+
+    public function deleteUser(){}
+
+
 
 }
