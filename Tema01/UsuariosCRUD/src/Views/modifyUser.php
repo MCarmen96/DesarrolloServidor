@@ -9,8 +9,8 @@
     <form action="/viewUpdateUser" method="post">
         <label for="">Introduce un nombre a modificar</label>
         <?php 
-            echo '<input type="text" name="nameUser"> value=$user';
-            echo "<input type='hidden' name='id' value='$id' >";
+            echo "<input type='text' name='nameUser' value='$user'>";
+            echo "<input type='hidden' name='id' value=\"{$id}\" >";
         ?>
         <button type="submit">Guardar cambios</button>
         

@@ -12,8 +12,8 @@
 
             echo "
             <li>{$usuarios[$i]}</li>
-            <a href='/deleteUser?id='$i'>Deleted</a> 
-            <a href='/modifyUser?id='$i'>Edit</a>";
+            <a href='/deleteUser?id={$i}'>Deleted</a> 
+            <a href='/modifyUser?id={$i}'>Edit</a>";
             
         }
     ?>

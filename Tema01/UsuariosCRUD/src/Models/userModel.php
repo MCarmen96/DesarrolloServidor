@@ -45,6 +45,8 @@ class UserModel{
 
     public function deleteUserById(int $id){
         $users=$this->getNames();
+
+        
         
         if(isset($users[$id])){
             $nombreBorrado=$users[$id];
@@ -63,6 +65,7 @@ class UserModel{
 
     public function getUser($id){
         $users=$this->getNames();
+        $id=(int)$id;
         return $users[$id];
     }
 
@@ -71,12 +74,24 @@ class UserModel{
         $entrada=trim(htmlspecialchars($user));
 
         $fileArray=$this->getNames();
+        $id=(int)$id;
 
-        $fileArray[$id]=$user;
+        if (isset($fileArray[$id])) {
+            $fileArray[$id] = $entrada;
+        }else{
+            error_log("el id no esta");
+        }
+    
 
-        $userUpdate=$fileArray;
+        $contentSave=implode("\n",$fileArray);
+
+        if(!empty($contentSave)){
+            $contentSave.="\n";
+        }
+        file_put_contents($this->filePath,$contentSave);
         
-        require __DIR__ . "/../Views/viewUpdateUser.php";
+        
+        return $entrada;
 
     }
 }
