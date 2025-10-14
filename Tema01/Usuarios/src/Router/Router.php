@@ -13,14 +13,19 @@ class Router{
 
     public function loadRoutes(){
         $this->routes["/"]=["controller"=>"HomeController","action"=>"viewForm"];
-        $this->routes["/addUser"]=["controller"=>"HomeController","action"=>"addNewUser"];
-        $this->routes["/deleteUser"]=["controller"=>"HomeController","action"=>"deleteUser"];
+        $this->routes["/addUser"]=["controller"=>"HomeController","action"=>"addNewUsers"];
+        $this->routes["/deleteUser"]=["controller"=>"HomeController","action"=>"deleteUsers"];
     }
 
     public function requestUsers(){
+
         $method=$_SERVER["REQUEST_METHOD"];
-        $path=$_SERVER["REQUEST_URI"];
+        $pathCompleto=$_SERVER["REQUEST_URI"];
+        $parteUri=parse_url($pathCompleto);
+        $path=$parteUri['path'] ?? "/";
+
         error_log($path);
+
         if(isset($this->routes[$path])){
 
             $saveRoute=$this->routes[$path];
@@ -31,14 +36,21 @@ class Router{
             
             if(class_exists($saveRouteController) && method_exists($saveRouteController,$action)){
 
+                error_log("ruta:".$saveRouteController);
+                error_log("metodo: ".$action);
+                error_log("Creando controlador...");
+
                 $controller=new $saveRouteController();
 
-                if($method==="POST"){
+                if($method==="GET"){
+                    $controller->$action($_GET);
+                    error_log("entro el metodo GET...");
+                    
+                }else if($method==="POST"){
                     $controller->$action($_POST);
-                }else if($method==="GET"){
-                    //$controller->$action($_GET['id']);
                 }else{
                     $controller->$action();
+            
                 }
             }else{
                 http_response_code(404);

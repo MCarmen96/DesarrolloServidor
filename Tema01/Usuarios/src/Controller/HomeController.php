@@ -1,6 +1,6 @@
 <?php
 
-namespace carmen\usuarios\Controller\HomeController;
+namespace carmen\usuarios\Controller;
 
 use carmen\usuarios\Models\UserModel;
 
@@ -11,19 +11,23 @@ class HomeController
     {
         $this->userModel=new UserModel();
     }
-
+    
     public function viewForm()
     {   
-        $usuarios=$this->userModel->getNames();
+        error_log("Entrando en viewForm()");
 
+        $usuarios=$this->userModel->getNames();
+        
         $content="<h1>Listas nombres</h1>";
+        $content.="<ul>";
 
         for ($i=0; $i < count($usuarios); $i++) { 
-            
-            $content.="<li>{$usuarios[$i]}</li>";
-        }
 
-        $content.= " <hr>  <form action='/addNewUser' method='post'>
+            $content.="<li>{$usuarios[$i]}</li><a href='/deleteUser?id={$i}'>Deleted</a>";
+        }
+        $content.="</ul>";
+
+        $content.= " <hr>  <form action='/addUser' method='post'>
         <label for=''>Introduce un nombre
             <input type='text' name='nameUser'>
         </label>
@@ -35,15 +39,19 @@ class HomeController
 
     public function addNewUsers($datos){
         
-        $nombreLimpio=htmlspecialchars($datos["nameUser"]);
+        $nombreLimpio=trim(htmlspecialchars($datos["nameUser"]));
         $this->userModel->writeFile($nombreLimpio);
-
+        error_log($nombreLimpio);
         echo "<h1>Bienvenido {$nombreLimpio}</h1>";
-        echo "<a href="/">Volver al inicio</a>";
+        echo "<a href='/'>Volver al inicio</a>";
 
     }
 
-    public function deleteUser(){}
+    public function deleteUser($datos){
+
+        $this->userModel->deleteUserById();
+
+    }
 
 
 

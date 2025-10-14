@@ -16,7 +16,7 @@ class UserModel{
     }
     public function writeFile($name){
 
-        file_put_contents("listUser.txt",$name,FILE_APPEND);
+        file_put_contents($this->filePath,$name."\n",FILE_APPEND);
     }
     public function getNames(){
 
@@ -29,20 +29,20 @@ class UserModel{
                 $fileOpen=fopen($file,"r");
 
                 while (($line = fgets($fileOpen)) !== false) {
-                    $fileUsers .=$line."\n";
+                    array_push($fileUsers,trim($line));
                 }
 
                 fclose($fileOpen);
 
             } else {
                 http_response_code(404);
-                echo "NOT FOUND FILE 404";
+                echo "ARCHIVO NO ENCONTRADO ".$this->filePath;
             }
 
             return $fileUsers;
     }
 
-    public function deleteName(){
-
+    public function deleteUserById(){
+        $user=$this->getNames();
     }
 }
