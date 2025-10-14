@@ -1,6 +1,6 @@
 <?php
 
-namespace carmen\usuarios\Router;
+namespace carmen\pruebamysql\Router;
 
 class Router{
 
@@ -12,9 +12,9 @@ class Router{
     }
 
     public function loadRoutes(){
-        $this->routes["/"]=["controller"=>"HomeController","action"=>"viewForm"];
-        $this->routes["/addUser"]=["controller"=>"HomeController","action"=>"addNewUsers"];
-        $this->routes["/deleteUser"]=["controller"=>"HomeController","action"=>"deleteUser"];
+
+        $this->routes["/"]=["controller"=>"HomeController","action"=>"viewIndex"];
+        
     }
 
     public function requestUsers(){

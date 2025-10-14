@@ -35,6 +35,22 @@ class HomeController
 
     }
 
+    public function modifyUser($data){
+        $id=$data["id"];
+        $user=$this->userModel->getUser($id);
+        require __DIR__ . "/../Views/modifyUser.php";
+
+    }
+
+    public function updateUser($data){
+        $id=$data["id"];
+        $user=$data["nameUser"];
+        
+        $this->userModel->modifyFileUpdateName($id,$user);
+
+        require __DIR__ . "/../Views/viewUpdateUser.php";
+    }
+
 
 
 }

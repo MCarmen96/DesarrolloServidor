@@ -15,6 +15,8 @@ class Router{
         $this->routes["/"]=["controller"=>"HomeController","action"=>"viewForm"];
         $this->routes["/addUser"]=["controller"=>"HomeController","action"=>"addNewUsers"];
         $this->routes["/deleteUser"]=["controller"=>"HomeController","action"=>"deleteUser"];
+        $this->routes["/modifyUser"]=["controller"=>"HomeController","action"=>"modifyUser"];
+        $this->routes["/viewUpdateUser"]=["controller"=>"HomeController","action"=>"updateUser"];
     }
 
     public function requestUsers(){

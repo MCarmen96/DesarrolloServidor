@@ -60,4 +60,23 @@ class UserModel{
         }
         return $nombreBorrado;
     }
+
+    public function getUser($id){
+        $users=$this->getNames();
+        return $users[$id];
+    }
+
+    public function modifyFileUpdateName($id,$user){
+
+        $entrada=trim(htmlspecialchars($user));
+
+        $fileArray=$this->getNames();
+
+        $fileArray[$id]=$user;
+
+        $userUpdate=$fileArray;
+        
+        require __DIR__ . "/../Views/viewUpdateUser.php";
+
+    }
 }

@@ -7,12 +7,18 @@
 </head>
 <body>
     <h1>LISTA DE USUARIOS</h1>
-    <ul>
-        <?=$fileUsers?>
-        
-    </ul>
+    <?php 
+        for ($i=0; $i < count($usuarios); $i++) { 
+
+            echo "
+            <li>{$usuarios[$i]}</li>
+            <a href='/deleteUser?id='$i'>Deleted</a> 
+            <a href='/modifyUser?id='$i'>Edit</a>";
+            
+        }
+    ?>
     <hr>
-    <form action="/viewForm" method="post">
+    <form action="/addUser" method="post">
         <label for="">Introduce un nombre
             <input type="text" name="nameUser">
         </label>
