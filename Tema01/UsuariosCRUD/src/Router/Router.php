@@ -20,40 +20,20 @@ class Router{
     }
 
     public function requestUsers(){
-
-        $method=$_SERVER["REQUEST_METHOD"];
-        $pathCompleto=$_SERVER["REQUEST_URI"];
-        $parteUri=parse_url($pathCompleto);
-        $path=$parteUri['path'] ?? "/";
-
+        $path=parse_url($_SERVER["REQUEST_URI"],PHP_URL_PATH);
         error_log($path);
-
         if(isset($this->routes[$path])){
 
             $saveRoute=$this->routes[$path];
-            $saveRouteController="carmen\\usuarios\\Controller\\".$saveRoute["controller"];
+            $controllerClass="carmen\\usuarios\\Controller\\".$saveRoute["controller"];
             $action=$saveRoute["action"];
-            error_log("ruta:".$saveRouteController);
+            error_log("ruta:".$controllerClass);
             error_log("metodo: ".$action);
             
-            if(class_exists($saveRouteController) && method_exists($saveRouteController,$action)){
+            if(class_exists($controllerClass) && method_exists($controllerClass,$action)){
 
-                error_log("ruta:".$saveRouteController);
-                error_log("metodo: ".$action);
-                error_log("Creando controlador...");
-
-                $controller=new $saveRouteController();
-
-                if($method==="GET"){
-                    $controller->$action($_GET);
-                    error_log("entro el metodo GET...");
-                    
-                }else if($method==="POST"){
-                    $controller->$action($_POST);
-                }else{
-                    $controller->$action();
-            
-                }
+                $controller=new $controllerClass();
+                $controller->$action($_REQUEST);
             }else{
                 http_response_code(404);
                 echo "NOT FOUND 404 RUTA NO ENCONTRADA";
