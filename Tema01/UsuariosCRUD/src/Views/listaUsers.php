@@ -9,7 +9,6 @@
     <h1>LISTA DE USUARIOS</h1>
     <?php 
         for ($i=0; $i < count($usuarios); $i++) { 
-
             echo "
             <li>{$usuarios[$i]}</li>
             <a href='/deleteUser?id={$i}'>Deleted</a> 

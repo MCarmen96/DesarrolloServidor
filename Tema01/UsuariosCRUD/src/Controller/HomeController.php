@@ -20,7 +20,7 @@ class HomeController
     }
 
     public function addNewUsers($datos){
-        
+        //sanitizar entrada de datos del usuario cogiendo el name del input
         $nombreLimpio=trim(htmlspecialchars($datos["nameUser"]));
         $this->userModel->writeFile($nombreLimpio);
 
@@ -30,7 +30,6 @@ class HomeController
     public function deleteUser($datos){
 
         $deleteName=$this->userModel->deleteUserById($datos["id"]);
-
         require __DIR__ ."/../Views/Despedida.php";
 
     }
