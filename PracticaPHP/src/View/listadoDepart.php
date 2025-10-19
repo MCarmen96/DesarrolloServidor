@@ -10,8 +10,7 @@
 
         <?php 
             for ($i=0; $i < count($departamentos) ; $i++) { 
-                echo `<li>Nombre:{$departamentos[$i]}</li>`;
-                   
+                echo "<li>{$departamentos[$i]}</li>";
             }
         ?>
 

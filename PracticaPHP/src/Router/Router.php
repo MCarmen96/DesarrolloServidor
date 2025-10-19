@@ -18,6 +18,7 @@ class Router{
         $this->routes["/"]=["controller"=>"appController","action"=>"viewMenu"];
         $this->routes["/listadoEmple"]=["controller"=>"appController","action"=>"viewEmple"];
         $this->routes["/listadoDepartamentos"]=["controller"=>"appController","action"=>"viewDepart"];
+        $this->routes["/eliminar"]=["controller"=>"appController","action"=>"viewDelete"];
 
      }
 

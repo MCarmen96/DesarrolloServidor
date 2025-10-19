@@ -18,9 +18,6 @@
          <li>
             <a href="/addEmple">Añadir nuevos empleados</a>
         </li>
-         <li>
-            <a href="/eliminarEmple">Eliminar empleados</a>
-        </li>
     </ul>
 </body>
 </html>

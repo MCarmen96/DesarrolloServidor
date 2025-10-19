@@ -20,6 +20,7 @@ class appController{
     public function viewEmple(){    
 
         $empleados=$this->userModel->getsEmple();
+        $departamentos=$this->userModel->getsDepart();
         require __DIR__ . "/../View/listadoEmpleados.php";
     }
 
@@ -28,6 +29,12 @@ class appController{
         $departamentos=$this->userModel->getsDepart();
 
         require __DIR__ . "/../View/listadoDepart.php";
+    }
+
+    public function viewDelete($data){
+        $deleteName=$this->userModel->deleteEmple($data["id"]);
+
+        require __DIR__ . "/../View//eliminar.php";
     }
 
 }

@@ -1,12 +1,12 @@
 [
     {
-        "nombre":"empleado1",
-        "apellido":"apellido1",
-        "depart":"1"
+        "nombre": "ana",
+        "apellido": "mena",
+        "depart": "2"
     },
     {
-        "nombre":"empleado2",
-        "apellido":"apellido2",
-        "depart":"2"
+        "nombre": "carmen",
+        "apellido": "navarro",
+        "depart": "0"
     }
 ]

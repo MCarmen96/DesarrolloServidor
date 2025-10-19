@@ -9,13 +9,21 @@
     <h1>LISTADO EMPLEADOS</h1>
 
         <?php 
-            for ($i=0; $i < count($empleados) ; $i++) { 
-                echo `<li>Nombre:{$empleados[$i]}</li>`;
-                echo `<li>Apellido:{$empleados[$i]}</li>`;
-                
+            foreach($empleados as $id =>$emple){
+
+                $depart=$emple["depart"];
+
+                $nombreDepart=$departamentos[$depart];
+
+                echo "<li>";
+                echo "Nombre: {$emple["nombre"]}, Apellido:{$emple["apellido"]}, departamento: {$nombreDepart}";
+                echo "<a href='/eliminar?id={$id}'> Eliminar</a>";
+                echo "</li>";
             }
             
         ?>
+
+        
 
         
 </body>

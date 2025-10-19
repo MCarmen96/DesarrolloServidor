@@ -1,0 +1,15 @@
+{
+    "name": "carme/plantillamvc",
+    "autoload": {
+        "psr-4": {
+            "app\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "MCarmen",
+            "email": "carmengarcianavarro19@gmail.com"
+        }
+    ],
+    "require": {}
+}
