@@ -13,7 +13,7 @@ class Router{
 
     public function loadRoutes(){
 
-        $this->routes["/"]=["controller"=>"HomeController","action"=>"viewIndex"];
+        $this->routes["/"]=["controller"=>"appController","action"=>"viewIndex"];
         
     }
 
@@ -29,7 +29,7 @@ class Router{
         if(isset($this->routes[$path])){
 
             $saveRoute=$this->routes[$path];
-            $saveRouteController="carmen\\usuarios\\Controller\\".$saveRoute["controller"];
+            $saveRouteController="carmen\\pruebamysql\\Controller\\".$saveRoute["controller"];
             $action=$saveRoute["action"];
             error_log("ruta:".$saveRouteController);
             error_log("metodo: ".$action);

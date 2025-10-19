@@ -10,7 +10,7 @@
     <h1>lista nombres</h1>
     <?php
         for ($i=0; $i <count($names) ; $i++) { 
-            echo"<li>{$names}</li>";
+            echo"<li>{$names[$i]}</li>";
         }
     ?>
     <form action="/newUser" method="post">

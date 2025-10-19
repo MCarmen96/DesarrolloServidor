@@ -6,5 +6,5 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
-    'carmen\\pruebamysql\\' => array($baseDir . '/src'),
+    'carmen\\practicaphp\\' => array($baseDir . '/src'),
 );

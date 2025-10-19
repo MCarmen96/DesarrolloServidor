@@ -23,7 +23,6 @@ class HomeController
         //sanitizar entrada de datos del usuario cogiendo el name del input
         $nombreLimpio=trim(htmlspecialchars($datos["nameUser"]));
         $this->userModel->writeFile($nombreLimpio);
-
         require __DIR__."/../Views/Bienvenido.php";
     }
 
@@ -44,7 +43,6 @@ class HomeController
     public function updateUser($data){
         $id=(int)$data["id"];
         $user=trim(htmlspecialchars($data["nameUser"]));
-        
         $userUpdate=$this->userModel->modifyFileUpdateName($id,$user);
 
         require __DIR__ . "/../Views/viewUpdateUser.php";

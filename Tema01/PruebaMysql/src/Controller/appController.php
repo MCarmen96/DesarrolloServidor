@@ -2,19 +2,19 @@
 
 namespace carmen\pruebamysql\Controller;
 
-use carmen\pruebamysql\Model;
+use carmen\pruebamysql\Model\database;
 
 
-class HomeController
+class appController
 {
     private $myModel;
     public function __construct()
     {
-        $this->myModel=new Database();
+        $this->myModel=new database();
     }
 
     public function viewIndex(){
         
-        echo "<h1>Primera pagina con MYsql</h1>";
+            require __DIR__ ."/../Views/home.php";
     }
 }

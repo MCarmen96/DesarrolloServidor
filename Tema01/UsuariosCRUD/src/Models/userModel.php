@@ -12,8 +12,7 @@ class UserModel
         $this->filePath = __DIR__ . "/../Database/listUser.txt";
     }
 
-    public function getNames()
-    {
+    public function getNames(){
 
         $fileUsers = [];
         //comprobar si el archivo existe
@@ -50,13 +49,7 @@ class UserModel
         if (isset($users[$id])) {
             $nombreBorrado = $users[$id];
             unset($users[$id]);
-            //reindexar el array para que no queden huecos
-            $contentSave = implode("\n", $users);
-
-            if (!empty($contentSave)) {
-                $contentSave .= "\n";
-            }
-            file_put_contents($this->filePath, $contentSave);
+            file_put_contents($this->filePath, implode(PHP_EOL, $users).PHP_EOL);
         }
         return $nombreBorrado;
     }
@@ -89,7 +82,6 @@ class UserModel
             $contentSave .= "\n";
         }
         file_put_contents($this->filePath, $contentSave);
-
 
         return $entrada;
     }

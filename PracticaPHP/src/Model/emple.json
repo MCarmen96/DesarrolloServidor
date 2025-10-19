@@ -1,0 +1,12 @@
+[
+    {
+        "nombre":"empleado1",
+        "apellido":"apellido1",
+        "depart":"1"
+    },
+    {
+        "nombre":"empleado2",
+        "apellido":"apellido2",
+        "depart":"2"
+    }
+]
