@@ -16,8 +16,10 @@ class Router{
         $this->routes["/"]=["controller"=>"appController","action"=>"viewIndex"];
         $this->routes["/listDepart"]=["controller"=>"appController","action"=>"listarDepartamentos"];
         $this->routes["/delDepart"]=["controller"=>"appController","action"=>"delDepart"];
-        //$this->routes["/addDepartForm"]=["controller"=>"appController","action"=>"addDepart"];
-        
+        $this->routes["/form"]=["controller"=>"appController","action"=>"formDepart"];
+        $this->routes["/addDepartForm"]=["controller"=>"appController","action"=>"addDepart"];
+        $this->routes["/formUpdate"]=["controller"=>"appController","action"=>"formUpdate"];
+        $this->routes["/updateDepart"]=["controller"=>"appController","action"=>"updateDepart"];
     }
 
     public function requestUsers(){

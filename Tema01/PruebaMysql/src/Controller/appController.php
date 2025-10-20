@@ -29,9 +29,34 @@ class appController
         $numDepart=$data["id"];
         $this->myModel->delDepart($numDepart);
 
-        header("Location: /listDepart.php");
+        header("Location: /listDepart");
 
     }
+    public function formUpdate($data){
 
-   
+        $id=(int)$data["id"];
+        $nombre="";
+        $localidad="";
+        $datos=$this->myModel->filterDepart($id);
+        for ($i=0; $i < count($datos); $i++) { 
+            $nombre=$datos[$i]["dnombre"];
+            $localidad=$datos[$i]["loc"];
+        }
+        require __DIR__."/../Views/formEditDepart.php";
+    }
+
+
+    public function formDepart(){
+        require __DIR__."/../Views/formAddDepart.php";
+
+    }
+    public function addDepart($data){
+        $nombre=$data['nameDepart'];
+        $numero=$data['numberDepart'];
+        $localidad=$data['locaDepart'];
+
+        $this->myModel->addDepart($nombre,$numero,$localidad);
+        header("Location: /listDepart");
+    }
+
 }

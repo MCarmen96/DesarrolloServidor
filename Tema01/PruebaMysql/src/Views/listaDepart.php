@@ -15,7 +15,8 @@
         for ($i=0; $i < count($departamentos); $i++) { 
             echo '<li>';
             echo "Numero: {$departamentos[$i]['depart_no']}, Nombre:{$departamentos[$i]['dnombre']}, localidad:{$departamentos [$i]['loc']}";
-            echo "<a href='/delDepart?id={$departamentos[$i]['depart_no']}'>Eliminar</a>";
+            echo "<a href='/delDepart?id={$departamentos[$i]['depart_no']}'> Eliminar</a> ";
+            echo "<a href='/formUpdate?id={$departamentos[$i]['depart_no']}'> Modificar </a>";
             echo '</li>';
         }
         echo "<br>";

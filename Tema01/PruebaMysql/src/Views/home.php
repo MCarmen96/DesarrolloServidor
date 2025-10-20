@@ -7,8 +7,14 @@
 </head>
 <body>
     <h1>Primera practica Mysql</h1>
-    <li>
-        <a href="/listDepart">Mostrar listado departementos</a>
-    </li>
+    <ul>
+        <li>
+            <a href="/listDepart">Mostrar listado departementos</a>
+        </li>
+        <li>
+            <a href="/form">Añadir nuevo departamento</a>
+        </li>
+    </ul>
+    
 </body>
 </html>

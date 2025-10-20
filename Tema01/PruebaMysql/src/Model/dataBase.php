@@ -37,13 +37,20 @@ class Database{
         try{
             $stmt=$this->pdo->prepare($sql);
             $stmt->execute($params);
-            return $stmt->rowCount();
+            return $stmt->rowCount();// devuelve la cantidad de filas afectadas
 
         }catch(PDOException $e){
             die("Error en la ejecucion ".$e->getMessage());
         }
     }
+    public function filterDepart($num){
 
+        $sql="SELECT dnombre,loc FROM depart WHERE depart_no=:id";
+        $para=[':id'=>$num];
+        $depart=$this->consulta($sql,$para);
+        return $depart;
+
+    }
     public function lisDepart(){
 
         $sentencia="SELECT * FROM depart";
@@ -56,6 +63,13 @@ class Database{
 
         $sql="DELETE FROM depart WHERE depart_no=:id";
         $this->execute($sql,[':id'=>$num]);
+
+    }
+
+    public function addDepart($nombre,$numero,$localidad){
+
+        $sentencia="INSERT INTO depart (depart_no,dnombre,loc) VALUES (:numero,:nombre,:localidad)";
+        $this->execute($sentencia,[':nombre'=>$nombre,':numero'=>$numero,':localidad'=>$localidad]);
 
     }
 
