@@ -6,9 +6,11 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Primera practica Mysql</h1>
-    <li>
-        <a href="/listDepart">Mostrar listado departementos</a>
-    </li>
+    <form action="" method="post">
+
+        <label for="">
+            <input type="text" name="">
+        </label>
+    </form>
 </body>
 </html>

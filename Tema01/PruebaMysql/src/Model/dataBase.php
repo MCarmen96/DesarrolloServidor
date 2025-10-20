@@ -6,7 +6,7 @@ use PDOException;
 class Database{
 
     private $host="127.0.0.1";
-    private $dbname="mysql";
+    private $dbname="depart";
     private $username="root";
     private $port="3306";
     private $password="";
@@ -31,6 +31,32 @@ class Database{
         }catch(PDOException $e){
             die("error".$e->getMessage());
         }
+    }
+
+    public function execute($sql,$params=[]){
+        try{
+            $stmt=$this->pdo->prepare($sql);
+            $stmt->execute($params);
+            return $stmt->rowCount();
+
+        }catch(PDOException $e){
+            die("Error en la ejecucion ".$e->getMessage());
+        }
+    }
+
+    public function lisDepart(){
+
+        $sentencia="SELECT * FROM depart";
+        $departamentos=$this->consulta($sentencia);
+
+        return $departamentos;
+    }
+
+    public function delDepart($num){
+
+        $sql="DELETE FROM depart WHERE depart_no=:id";
+        $this->execute($sql,[':id'=>$num]);
+
     }
 
 }

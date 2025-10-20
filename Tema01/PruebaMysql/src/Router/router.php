@@ -14,6 +14,9 @@ class Router{
     public function loadRoutes(){
 
         $this->routes["/"]=["controller"=>"appController","action"=>"viewIndex"];
+        $this->routes["/listDepart"]=["controller"=>"appController","action"=>"listarDepartamentos"];
+        $this->routes["/delDepart"]=["controller"=>"appController","action"=>"delDepart"];
+        //$this->routes["/addDepartForm"]=["controller"=>"appController","action"=>"addDepart"];
         
     }
 
