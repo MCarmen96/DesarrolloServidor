@@ -18,7 +18,7 @@
         </label>
 
         <label for="">NºDepart
-            <input type="text" value="<?php echo htmlspecialchars($id); ?>" name="newId">
+            <input type="text" value="<?php echo htmlspecialchars($id); ?>" name="newId" readonly>
         </label>
         
     <button type="submit">Guardar Cambios</button>
