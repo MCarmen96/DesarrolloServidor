@@ -1,5 +1,5 @@
 {
-    "name": "carme/plantillamvc",
+    "name": "carmen/plantillamvc",
     "autoload": {
         "psr-4": {
             "app\\": "src/"
@@ -11,5 +11,8 @@
             "email": "carmengarcianavarro19@gmail.com"
         }
     ],
-    "require": {}
+    "require": {},
+    "scripts": {
+        "start":"php -S localhost:8000 -t public"
+    }
 }
