@@ -17,17 +17,18 @@
         }
     ?>
     <hr>
-    <h2>Añadir departamento</h2>
-    <form action="">
+    <h2>Añadir nuevos departamento</h2>
+    <form action="/create" method="post">
         <label for="">Nombre
-            <input type="text" value="">
+            <input type="text" name="name">
         </label>
-        <label for="">Departamento
-            <input type="text">
+        <label for="">Localidad
+            <input type="text" name="loc">
         </label>
-        <label for="">Numero
-            <input type="text">
+        <label for="">Numeor Departamento
+            <input type="text" name="id">
         </label>
+        <button type="submit">Guardar</button>
     </form>
     
 </body>

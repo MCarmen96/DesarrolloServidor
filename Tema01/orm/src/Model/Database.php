@@ -53,11 +53,38 @@ class Database{
 
     public function findDepart($id){
 
-        $depar=Depart::find($id);
+        $depar=Depart::find($id);//devuelve el objeto departamento
         return $depar;
-
-
     }
 
+    public function saveEdit($id,$nombre,$loc){
+
+        $depart=Depart::find($id);
+        $econtrado=false;
+        if($depart){
+            $depart->dnombre=$nombre;
+            $depart->loc=$loc;
+            $depart->save();
+            error_log("Departamento actualizado ". $nombre);
+            $econtrado=true;
+
+        }else{
+            error_log("Departamento no encontrado " .$nombre);
+        }
+        return $econtrado;
+    }
+
+    public function create($name,$loc,$id){
+        try{
+            Depart ::create([
+                'depart_no'=>$id,
+                'dnombre'=>$name,
+                'loc'=>$loc
+            ]);
+        }catch(\Exception $e){
+
+            die("Error al insertar departamento". $e->getMessage());
+        }
+    }
 
 }

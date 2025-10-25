@@ -16,6 +16,8 @@ class Router{
         $this->routes["/"]=["controller"=>"appController","action"=>"viewIndex"];
         $this->routes["/delete"]=["controller"=>"appController","action"=>"deleteDepart"];
         $this->routes["/edit"]=["controller"=>"appController","action"=>"findDepart"];
+        $this->routes["/saveEdit"]=["controller"=>"appController","action"=>"saveEdit"];
+         $this->routes["/create"]=["controller"=>"appController","action"=>"create"];
         
     }
 
