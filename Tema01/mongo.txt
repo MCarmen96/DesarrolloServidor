@@ -1,0 +1,9 @@
+/usr/local/mongodb/bin/mongod --dbpath ~/data/db
+
+Elemento,Diapositiva,Mac (Simplificado),Notas
+Herramienta,/mongoimport,mongoimport,Se encuentra gracias al PATH.
+Host/Puerto,--host localhost --port 27666,--port 27017,Usamos el puerto estándar. No es necesario localhost.
+Base de Datos,--db test,--db test,Nombre de la base de datos.
+Colección,--collection people,--collection people,Nombre de la colección.
+Archivo,--file ejemplo.json,--file ejemplo.json,Ruta al archivo.
+Array JSON,--jsonArray,--jsonArray,Necesario si el archivo es un array [...] en lugar de una línea por documento.
