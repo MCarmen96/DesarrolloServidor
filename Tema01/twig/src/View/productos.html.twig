@@ -1,0 +1,12 @@
+{% extends "base.html.twig" %}
+
+{% block title %} Productos {%endblock%}
+
+{% block content %}
+
+    {%  for pro in productos %}
+         <li> {{pro.nombre}} - $ {{pro.precio}}</li>
+    {% endfor %}
+
+{% endblock%}
+            
