@@ -1,0 +1,13 @@
+{% macro colorCard(personaje,clase)%}
+
+    <div class="card {{clase}} mb-3" style="max-width: 18rem;">
+        <div class="card-header">{{personaje.nombre}}</div>
+        <div class="card-body">
+            <h5 class="card-title">{{personaje.pelicula}}</h5>
+            <p class="card-text">
+                {{personaje.villano ? 'Villano' : 'Heroe'}}
+            </p>
+        </div>
+    </div>
+
+{%endmacro%}

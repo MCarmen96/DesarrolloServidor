@@ -13,9 +13,9 @@ class personajeModel{
     }
 
     public function listData(){
-        $file=$this->filePath;
-        $arrayDatos=json_decode($file);
-        error_log(json_encode($arrayDatos));
+        $contentJson=file_get_contents($this->filePath);
+        $arrayDatos=json_decode($contentJson,true);
+        error_log("esto es el null....".json_encode($arrayDatos));
         return $arrayDatos;
 
     }

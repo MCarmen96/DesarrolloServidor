@@ -25,7 +25,7 @@
 
         public function index(){
             $datos=$this->myModel->listData();
-            echo $this->twig->render("base.html.twig",[$datos]);
+            echo $this->twig->render("personajes.html.twig",['personajes'=>$datos]);
         }
 
 
