@@ -1,0 +1,82 @@
+[
+    {
+        "nombre": "Iron Man",
+        "pelicula": "Avengers",
+        "villano": false
+    },
+    {
+        "nombre": "Thanos",
+        "pelicula": "Avengers: Infinity War",
+        "villano": true
+    },
+    {
+        "nombre": "Harry Potter",
+        "pelicula": "Harry Potter y la piedra filosofal",
+        "villano": false
+    },
+    {
+        "nombre": "Voldemort",
+        "pelicula": "Harry Potter y las reliquias de la muerte",
+        "villano": true
+    },
+    {
+        "nombre": "Wonder Woman",
+        "pelicula": "Wonder Woman 1984",
+        "villano": false
+    },
+    {
+        "nombre": "Joker",
+        "pelicula": "The Dark Knight",
+        "villano": true
+    },
+    {
+        "nombre": "Luke Skywalker",
+        "pelicula": "Star Wars: El retorno del Jedi",
+        "villano": false
+    },
+    {
+        "nombre": "Darth Vader",
+        "pelicula": "Star Wars: Una nueva esperanza",
+        "villano": true
+    },
+    {
+        "nombre": "Spider-Man",
+        "pelicula": "Spider-Man: No Way Home",
+        "villano": false
+    },
+    {
+        "nombre": "Green Goblin",
+        "pelicula": "Spider-Man",
+        "villano": true
+    },
+    {
+        "nombre": "Black Panther",
+        "pelicula": "Black Panther",
+        "villano": false
+    },
+    {
+        "nombre": "Killmonger",
+        "pelicula": "Black Panther",
+        "villano": true
+    },
+    {
+        "nombre": "Elsa",
+        "pelicula": "Frozen",
+        "villano": false
+    },
+    {
+        "nombre": "Maléfica",
+        "pelicula": "Maleficent",
+        "villano": true
+    },
+    {
+        "nombre": "Superman",
+        "pelicula": "Man of Steel",
+        "villano": false
+    },
+    {
+        "nombre": "Lex Luthor",
+        "pelicula": "Batman v Superman: Dawn of Justice",
+        "villano": true
+    }
+]

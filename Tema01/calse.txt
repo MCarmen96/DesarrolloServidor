@@ -1,0 +1,9 @@
+
+VIEWS:
+TWIGS
+CARPETAS
+componentes
+paginas
+macros-ALERTA
+TARJETA POR `PERSONAJE
+BASE DE LAYOUT
