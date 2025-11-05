@@ -17,6 +17,7 @@
 
         public function index(){
             echo $this->twig->render("home.html.twig");
+            
         }
 
         public function loginForm(){
@@ -37,10 +38,14 @@
             //password_verify($hashedPin,$pinLimpio);
             error_log("antes del  if.....");
             // VERIFICAR QUE LLEGUEN BIEN LOS DATOS POR LA CONSOLA
-            if(password_verify($hashedPin,$pinLimpio)&&$nameLimpio=='admin'){
+            error_log($hashedPin);
+            error_log($pinLimpio);
+            error_log($nameLimpio);
+
+            if(password_verify($pinLimpio,$hashedPin)&&$nameLimpio=='admin'){
                 error_log("entro en el if.....");
                 session_start();
-
+                $_SESSION['activa'] = true;
                 echo $this->twig->render("activo.html.twig",['activo'=>true]);
 
             }else{
@@ -48,10 +53,8 @@
 
             }
 
-
-
         }
 
-
+        
 
     }

@@ -13,8 +13,13 @@
             <ul>
                 <li>
 
-                    <a href="/"> Home | </a> <a href="/loginForm"> Login </a> 
-                    {{activo}}
+                    <a href="/"> Home |  </a> 
+                    {% if activo %}
+                        <a href="/"> Logout </a>
+                    {% else %}
+                        <a href="/loginForm"> Login </a>
+                    {% endif %}
+                    
                 </li>
             </ul>
              <hr>
