@@ -4,12 +4,13 @@
 {% block title %}Listado de personajes{% endblock %}
 {% block content %}
     <h1>--Personajes--</h1>
+
     <div class=row>
         {% for personaje in personajes  %}
             {%  set clase=personaje.villano ? 'text-bg-danger' : 'text-bg-success' %}
 
             {{ cambioColor.colorCard(personaje,clase)}}
-    {%endfor%}
+        {%endfor%}
     </div>
     
 {% endblock %}
