@@ -45,13 +45,23 @@
             if(password_verify($pinLimpio,$hashedPin)&&$nameLimpio=='admin'){
                 error_log("entro en el if.....");
                 session_start();
-                $_SESSION['activa'] = true;
+                
                 echo $this->twig->render("activo.html.twig",['activo'=>true]);
 
             }else{
                 echo $this->twig->render("fallo.html.twig",['activo'=>false]);
 
             }
+
+        }
+
+        public function exitSession(){
+
+            session_unset();
+            session_destroy();
+            
+            header("Location: /");
+            exit;
 
         }
 

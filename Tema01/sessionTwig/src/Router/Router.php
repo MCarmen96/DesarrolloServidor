@@ -16,6 +16,7 @@ class Router{
         $this->routes["/"]=["controller"=>"appController","action"=>"index"];
         $this->routes["/loginForm"]=["controller"=>"appController","action"=>"loginForm"];
         $this->routes["/login"]=["controller"=>"appController","action"=>"login"];
+        $this->routes["/exitSession"]=["controller"=>"appController","action"=>"exitSession"];
        
     }
 
