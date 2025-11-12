@@ -51,8 +51,9 @@ class Database{
 
     public function searchUser($name){
 
-        $user=User::find($name);
-
-        return $user;
+        $user=User::where('nombre',$name)->first();
+        $registerUser=json_decode($user);
+        error_log(json_encode($user));
+        return $registerUser;
     }
 }

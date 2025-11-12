@@ -33,6 +33,7 @@ class appController{
     }
 
     public function saveUser(){
+
         error_log("entra en el function de save user");
         $nameLimpio=filter_input(INPUT_POST,'name',FILTER_SANITIZE_SPECIAL_CHARS);
         $pinLimpio=filter_input(INPUT_POST,'pin',FILTER_SANITIZE_SPECIAL_CHARS);
@@ -62,14 +63,27 @@ class appController{
 
         $hashedPin=password_hash($pinLimpio,PASSWORD_BCRYPT);
 
-        $validPassword=password_verify($pinLimpio,$hashedPin);
-        $this->modelUser->searchUser($nameLimpio);
+        //busco el usuario en la base de datos
+        $userData=$this->modelUser->searchUser($nameLimpio);
+        //si el usuario existe...
+        if($userData && isset($userData['password'])){
+            //compara el pin introducido con el has de la bbdd
+            if(password_verify($pinLimpio,$userData['password'])){
+                $_SESSION['name']=$userData['name'];
+                $this->twig->addGlobal('state_active', true);
+                $this->twig->addGlobal('name', $userData['name']);
+                
+                echo $this->twig->render('bienvenido.html.twig', [
+                'name' => $userData['name']]);
+            }else{
+                echo $this->twig->render('fallo.html.twig', [
+                'mensaje' => 'PIN incorrecto']);
+            }
+        }else{
+                echo $this->twig->render('fallo.html.twig', [
+                'mensaje' => 'Usuario no encontrado']);
+            }
         
-        // UNA VEZ QUE HAGA EL LOGIN Y FILTRE POR EL NOMBRE DEL USUARIO
-        // funcion buscar usuario devuelve nombre y el pin compara su has guardao en la base de datos
-        // DEVUELVO LOS DATOS DEL CAMPO COMPRA Y LO MUESTRO EN EL INPUT TEXT
-
-        // hay que establecer en el inicio de sesion de la cookiee y el name del usaurio en el session 
     }
 
     public function exit(){
