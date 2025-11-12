@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"></link>
+    <title>{% block title %} Mi sitio Web con Twig+ BBDD {% endblock %}</title>
+</head>
+<body>
+    <header>
+        <h1>{{title}}</h1>
+
+        <nav class="navbar navbar-expand-lg bg-body-tertiary">
+            <ul>
+                <li>
+
+                    <a class="navbar-brand" href="/"> Home |  </a> 
+                    
+                    {% if state_active %}
+                        <a class="navbar-brand" href="/exitSession"> Logout ({{ name }})</a>
+                        <a class="navbar-brand" href="/pageShop"> Shop</a>
+                    {% else %}
+                        <a class="navbar-brand" href="/loginForm"> Login | </a>
+                        <a class="navbar-brand" href="/form"> Registro   </a>
+                    {% endif %}
+                    
+                    
+                    
+                </li>
+            </ul>
+             <hr>
+        
+        
+        </nav>
+    </header>
+
+    <main>
+        {% block content %}
+        
+        {% endblock %}
+    </main>
+    <hr>
+
+    <footer> 2025</footer>
+</body>
+</html>

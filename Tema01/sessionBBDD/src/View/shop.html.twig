@@ -1,0 +1,15 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+
+    <form action="/saveShop" method="post">
+
+        <label for="" > Lista compra
+            <input type="text" name='dataShop'>
+        </label>
+        <button type="submit">save</button>
+    </form>
+    
+    <a href="/">Volver</a>
+
+{% endblock %}

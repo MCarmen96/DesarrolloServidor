@@ -1,0 +1,21 @@
+{
+    "name": "carmen/plantillamvc",
+    "autoload": {
+        "psr-4": {
+            "app\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "MCarmen",
+            "email": "carmengarcianavarro19@gmail.com"
+        }
+    ],
+    "require": {
+        "illuminate/database": "^12.37",
+        "twig/twig": "^3.22"
+    },
+    "scripts": {
+        "start":"php -S localhost:8000 -t public"
+    }
+}

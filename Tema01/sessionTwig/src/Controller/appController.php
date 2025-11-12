@@ -13,10 +13,13 @@
         {
             $loader=new FilesystemLoader(__DIR__."/../View");
             $this->twig=new Environment($loader);
+            $this->twig->addGlobal("name",$_SESSION["name"]);
+
         }
 
         public function index(){
-            echo $this->twig->render("home.html.twig");
+
+            echo $this->twig->render("home.html.twig",['activo'=>false,'name'=>$_SESSION["name"]]);
             
         }
 
@@ -45,8 +48,7 @@
             if(password_verify($pinLimpio,$hashedPin)&&$nameLimpio=='admin'){
                 error_log("entro en el if.....");
                 session_start();
-                
-                echo $this->twig->render("activo.html.twig",['activo'=>true]);
+                echo $this->twig->render("activo.html.twig",['activo'=>true,'nombre'=>$nameLimpio]);
 
             }else{
                 echo $this->twig->render("fallo.html.twig",['activo'=>false]);
