@@ -55,26 +55,30 @@ class appController{
         }
 
     }
+    public function formLogin(){
+        
+        echo $this->twig->render('loginForm.html.twig');
+    }
 
     public function login(){
 
         $nameLimpio=filter_input(INPUT_POST,'name',FILTER_SANITIZE_SPECIAL_CHARS);
         $pinLimpio=filter_input(INPUT_POST,'pin',FILTER_SANITIZE_SPECIAL_CHARS);
 
-        $hashedPin=password_hash($pinLimpio,PASSWORD_BCRYPT);
+        
 
         //busco el usuario en la base de datos
         $userData=$this->modelUser->searchUser($nameLimpio);
         //si el usuario existe...
-        if($userData && isset($userData['password'])){
+        if($userData){
             //compara el pin introducido con el has de la bbdd
-            if(password_verify($pinLimpio,$userData['password'])){
-                $_SESSION['name']=$userData['name'];
+            if(password_verify($pinLimpio,$userData->password)){
+                $_SESSION['name']=$userData->nombre;
                 $this->twig->addGlobal('state_active', true);
-                $this->twig->addGlobal('name', $userData['name']);
+                $this->twig->addGlobal('name', $userData->nombre);
                 
                 echo $this->twig->render('bienvenido.html.twig', [
-                'name' => $userData['name']]);
+                'name' => $userData->nombre]);
             }else{
                 echo $this->twig->render('fallo.html.twig', [
                 'mensaje' => 'PIN incorrecto']);
@@ -95,7 +99,15 @@ class appController{
 
     public function shop(){
 
-        echo $this->twig->render('shop.html.twig');
+        if(!isset ($_SESSION['name'])){
+            header ("Location: /");
+            exit;
+        }
+
+        $name=$_SESSION['name'];
+        $user=$this->modelUser->searchUser($name);
+        $textoCompra=$user&& $user->compra ? $user->compra : '';
+        echo $this->twig->render('shop.html.twig',['dataShop'=>$textoCompra]);
     }
 
     public function saveShop(){
@@ -104,7 +116,7 @@ class appController{
         $dataShop=filter_input(INPUT_POST,'dataShop',FILTER_SANITIZE_SPECIAL_CHARS);
         $this->modelUser->saveShop($dataShop,$name);
 
-        header("Location: /");
+        header("Location: /shop");
         exit;
 
     }

@@ -40,7 +40,7 @@ class Database{
 
     public function saveShop($dataShop,$name){
 
-        $user=User::find($name);
+        $user=User::where('nombre',$name)->first();
 
         if($user){
             $user->compra=$dataShop;
@@ -51,8 +51,8 @@ class Database{
 
     public function searchUser($name){
 
-        $user=User::find($name);
-
+        $user=User::where('nombre',$name)->first();
+        
         return $user;
     }
 }

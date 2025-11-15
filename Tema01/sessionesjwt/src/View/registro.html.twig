@@ -1,0 +1,15 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+    <h1>Registro</h1>
+    <form action="/saveUser" method="post">
+
+        <label for="" class="form-control" aria-label="Sizing example input" >Name
+            <input type="text" name="name" required>
+        </label>
+        <label for="" class="form-control" aria-label="Sizing example input"  >Contraseña
+            <input type="password" name="pin" required>
+        </label>
+        <button type="submit" class="btn btn-outline-primary">Enviar</button>
+    </form>
+{% endblock %}

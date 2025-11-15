@@ -13,12 +13,14 @@ class Router{
 
     public function loadRoutes(){
 
-        $this->routes["/"]=["controller"=>"appController","action"=>"viewIndex"];
+        $this->routes["/"]=["controller"=>"appController","action"=>"index"];
+        $this->routes["/form"]=["controller"=>"appController","action"=>"form"];
+        $this->routes["/saveUser"]=["controller"=>"appController","action"=>"saveUser"];
+        $this->routes["/exitSession"]=["controller"=>"appController","action"=>"exit"];
+        $this->routes["/formLogin"]=["controller"=>"appController","action"=>"formLogin"];
         $this->routes["/login"]=["controller"=>"appController","action"=>"login"];
-        $this->routes["/resgisterForm"]=["controller"=>"appController","action"=>"registerForm"];
-        $this->routes["/"]=["controller"=>"appController","action"=>"registerForm"];
-        // endecode cada vez que vas hacer del login
-        //decode
+        $this->routes["/pageShop"]=["controller"=>"appController","action"=>"shop"];
+        $this->routes["/saveShop"]=["controller"=>"appController","action"=>"saveshop"];
     }
 
     public function requestUsers(){

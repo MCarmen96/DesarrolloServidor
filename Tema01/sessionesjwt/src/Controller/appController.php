@@ -1,28 +1,26 @@
 <?php
 
 namespace app\Controller;
+use Firebase\JWT\JWT;
+use Firebase\JWT\Key;
 use app\Model\Database;
-use Dotenv\Dotenv;
 use Twig\Loader\FilesystemLoader;
 use Twig\Environment;
 
-class appController{
+class appController
+{
 
     private $twig;
     private $modelUser;
 
     public function __construct()
-    {       
-
-        $dotenv=Dotenv::createImmutable(__DIR__ .'/../..');
-        $dotenv->load();
+    {
         
+        $this->modelUser = new Database();
+        $loader = new FilesystemLoader(__DIR__ . "/../View");
+        $this->twig = new Environment($loader);
 
-        $this->modelUser=new Database();
-        $loader=new FilesystemLoader(__DIR__ . "/../View");
-        $this->twig=new Environment($loader);
-
-        if(session_status()===PHP_SESSION_NONE){
+        if (session_status() === PHP_SESSION_NONE) {
             session_start();
         }
 
@@ -30,76 +28,138 @@ class appController{
         $this->twig->addGlobal('name', $_SESSION['name'] ?? null);
     }
 
-    public function index(){
+    public function index()
+    {
         echo $this->twig->render("home.html.twig");
     }
 
-    public function form(){
+    public function form()
+    {
         echo $this->twig->render("registro.html.twig");
     }
 
-    public function saveUser(){
+    public function saveUser()
+    {
+
         error_log("entra en el function de save user");
-        $nameLimpio=filter_input(INPUT_POST,'name',FILTER_SANITIZE_SPECIAL_CHARS);
-        $pinLimpio=filter_input(INPUT_POST,'pin',FILTER_SANITIZE_SPECIAL_CHARS);
+        $nameLimpio = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_SPECIAL_CHARS);
+        $pinLimpio = filter_input(INPUT_POST, 'pin', FILTER_SANITIZE_SPECIAL_CHARS);
 
-        $hashedPin=password_hash($pinLimpio,PASSWORD_BCRYPT);
+        $hashedPin = password_hash($pinLimpio, PASSWORD_BCRYPT);
 
-        $validSave=$this->modelUser->saveUSer($nameLimpio,$hashedPin);
-        
-        if($validSave){
-            
+        $validSave = $this->modelUser->saveUSer($nameLimpio, $hashedPin);
+
+        if ($validSave) {
+
             $_SESSION['name'] = $nameLimpio;
             $this->twig->addGlobal('state_active', true);
             $this->twig->addGlobal('name', $nameLimpio);
             echo $this->twig->render('bienvenido.html.twig', [
                 'name' => $nameLimpio
             ]);
-        }else{
+        } else {
             echo $this->twig->render('fallo.html.twig');
         }
+    }
+    public function formLogin()
+    {
 
+        echo $this->twig->render('loginForm.html.twig');
     }
 
-    public function login(){
+    public function login()
+    {
 
-        $nameLimpio=filter_input(INPUT_POST,'name',FILTER_SANITIZE_SPECIAL_CHARS);
-        $pinLimpio=filter_input(INPUT_POST,'pin',FILTER_SANITIZE_SPECIAL_CHARS);
+        $nameLimpio = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_SPECIAL_CHARS);
+        $pinLimpio = filter_input(INPUT_POST, 'pin', FILTER_SANITIZE_SPECIAL_CHARS);
 
-        $hashedPin=password_hash($pinLimpio,PASSWORD_BCRYPT);
 
-        $validPassword=password_verify($pinLimpio,$hashedPin);
-        $this->modelUser->searchUser($nameLimpio);
-        
-        // UNA VEZ QUE HAGA EL LOGIN Y FILTRE POR EL NOMBRE DEL USUARIO
-        // funcion buscar usuario devuelve nombre y el pin compara su has guardao en la base de datos
-        // DEVUELVO LOS DATOS DEL CAMPO COMPRA Y LO MUESTRO EN EL INPUT TEXT
 
-        // hay que establecer en el inicio de sesion de la cookiee y el name del usaurio en el session 
+
+        //busco el usuario en la base de datos
+        $userData = $this->modelUser->searchUser($nameLimpio);
+
+        //si el usuario existe...
+        if ($userData) {
+
+            //compara el pin introducido con el has de la bbdd
+            if (password_verify($pinLimpio, $userData->password)) {
+
+                $key=$_ENV['DB_KEY'];
+                if($key===false){
+                    die('Error: la variable de entorno no esta definida');
+                }
+
+                $payload=[
+                    'user_id'=>123,
+                    'role'=>'admin',
+                    'iat'=>time(),
+                    'exp'=>time()+3600
+                ];
+
+                $jwt=JWT::encode($payload,$key,'HS256');
+
+                setcookie('session_token',$jwt,time() + 3600, '/','',false,true);
+                $_SESSION['name'] = $userData->nombre;
+                $this->twig->addGlobal('state_active', true);
+                $this->twig->addGlobal('name', $userData->nombre);
+
+                echo $this->twig->render('bienvenido.html.twig', [
+                    'name' => $userData->nombre
+                ]);
+            } else {
+                echo $this->twig->render('fallo.html.twig', [
+                    'mensaje' => 'PIN incorrecto'
+                ]);
+            }
+        } else {
+            echo $this->twig->render('fallo.html.twig', [
+                'mensaje' => 'Usuario no encontrado'
+            ]);
+        }
     }
 
-    public function exit(){
+    public function exit()
+    {
+        setcookie('user_name', '', time() - 3600, '/');
+
         session_unset();
         session_destroy();
-        header("Location: /");
-        exit;
-    }
-
-    public function shop(){
-
-        echo $this->twig->render('shop.html.twig');
-    }
-
-    public function saveShop(){
-
-        $name=$_SESSION['name'];
-        $dataShop=filter_input(INPUT_POST,'dataShop',FILTER_SANITIZE_SPECIAL_CHARS);
-        $this->modelUser->saveShop($dataShop,$name);
 
         header("Location: /");
         exit;
-
     }
 
+    public function shop()
+    {
 
+        if (!isset($_COOKIE['user_name'])) {
+            header("Location: /");
+            exit;
+        }
+
+        $name = $_COOKIE['user_name'];
+        $user = $this->modelUser->searchUser($name);
+        $textoCompra = $user && $user->compra ? $user->compra : '';
+        echo $this->twig->render('shop.html.twig', ['dataShop' => $textoCompra]);
+    }
+
+    public function saveShop()
+    {
+        // Verificamos que exista cookie con el nombre del usuario
+        if (!isset($_COOKIE['user_name'])) {
+            header("Location: /");
+            exit;
+        }
+
+        $name = $_COOKIE['user_name'];
+        $dataShop = filter_input(INPUT_POST, 'dataShop', FILTER_SANITIZE_SPECIAL_CHARS);
+
+        // Guardamos en la base de datos
+        $this->modelUser->saveShop($dataShop, $name);
+
+        // Redirigimos de nuevo a la vista del shop
+        header("Location: /");
+        exit;
+    }
 }
