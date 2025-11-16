@@ -37,7 +37,7 @@
             $pinLimpio=filter_input(INPUT_POST,'pin',FILTER_SANITIZE_SPECIAL_CHARS);
 
             $hashedPin=password_hash('admin',PASSWORD_BCRYPT);
-            // * VALIDO LA CONTRASEÑA CON LA QUE YO QUIERO
+            // VALIDO LA CONTRASEÑA CON LA QUE YO QUIERO
             //password_verify($hashedPin,$pinLimpio);
             error_log("antes del  if.....");
             // VERIFICAR QUE LLEGUEN BIEN LOS DATOS POR LA CONSOLA

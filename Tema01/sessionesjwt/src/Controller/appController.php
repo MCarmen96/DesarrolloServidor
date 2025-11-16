@@ -1,6 +1,7 @@
 <?php
 
 namespace app\Controller;
+use Dotenv\Dotenv;
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
 use app\Model\Database;
@@ -13,33 +14,46 @@ class appController
     private $twig;
     private $modelUser;
 
-    public function __construct()
-    {
-        
+    public function __construct(){
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+
         $this->modelUser = new Database();
         $loader = new FilesystemLoader(__DIR__ . "/../View");
         $this->twig = new Environment($loader);
+        $dotenv=Dotenv::createImmutable(__DIR__.'/../..');
+        $dotenv->load();
 
-        if (session_status() === PHP_SESSION_NONE) {
-            session_start();
+        $key=$_ENV['DB_KEY'];
+        $token=$_COOKIE['token']??null;
+        if($token){
+            try{
+
+                $decoded=JWT::decode($token,new key($key,'HS256'));
+                echo $this->twig->render('bienvenido.html.twig',['token'=>true]);
+
+            }catch(\Exception $e){
+                setcookie("token","",time()-3600,"/");
+            }
+        }else{
+            echo $this->twig->render('loginForm.html.twig',['token'=>false]);
         }
 
         $this->twig->addGlobal('state_active', isset($_SESSION['name']));
         $this->twig->addGlobal('name', $_SESSION['name'] ?? null);
     }
 
-    public function index()
-    {
+    public function index(){
         echo $this->twig->render("home.html.twig");
     }
 
-    public function form()
-    {
+    public function form(){
         echo $this->twig->render("registro.html.twig");
     }
 
-    public function saveUser()
-    {
+    public function saveUser(){
+
 
         error_log("entra en el function de save user");
         $nameLimpio = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_SPECIAL_CHARS);
@@ -48,6 +62,21 @@ class appController
         $hashedPin = password_hash($pinLimpio, PASSWORD_BCRYPT);
 
         $validSave = $this->modelUser->saveUSer($nameLimpio, $hashedPin);
+        $key = $_ENV['DB_KEY'];
+        if ($key === false) {
+            die('Error: la variable de entorno no esta definida');
+        }
+
+        $payload = [
+            'user_id' => 123,
+            'role' => 'admin',
+            'iat' => time(),
+            'exp' => time() + 3600
+        ];
+
+        $jwt = JWT::encode($payload, $key, 'HS256');
+
+        setcookie('session_token', $jwt, time() + 3600, '/', '', false, true);
 
         if ($validSave) {
 
@@ -61,20 +90,15 @@ class appController
             echo $this->twig->render('fallo.html.twig');
         }
     }
-    public function formLogin()
-    {
+    public function formLogin(){
 
         echo $this->twig->render('loginForm.html.twig');
     }
 
-    public function login()
-    {
+    public function login(){
 
         $nameLimpio = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_SPECIAL_CHARS);
         $pinLimpio = filter_input(INPUT_POST, 'pin', FILTER_SANITIZE_SPECIAL_CHARS);
-
-
-
 
         //busco el usuario en la base de datos
         $userData = $this->modelUser->searchUser($nameLimpio);
@@ -85,21 +109,22 @@ class appController
             //compara el pin introducido con el has de la bbdd
             if (password_verify($pinLimpio, $userData->password)) {
 
-                $key=$_ENV['DB_KEY'];
-                if($key===false){
+                $key = $_ENV['DB_KEY'];
+                if ($key === false) {
                     die('Error: la variable de entorno no esta definida');
                 }
 
-                $payload=[
-                    'user_id'=>123,
-                    'role'=>'admin',
-                    'iat'=>time(),
-                    'exp'=>time()+3600
+                $payload = [
+                    'user_id' => 123,
+                    'role' => 'admin',
+                    'iat' => time(),
+                    'exp' => time() + 3600
                 ];
 
-                $jwt=JWT::encode($payload,$key,'HS256');
+                $jwt = JWT::encode($payload, $key, 'HS256');
 
-                setcookie('session_token',$jwt,time() + 3600, '/','',false,true);
+                setcookie('session_token', $jwt, time() + 3600, '/', '', false, true);
+
                 $_SESSION['name'] = $userData->nombre;
                 $this->twig->addGlobal('state_active', true);
                 $this->twig->addGlobal('name', $userData->nombre);
@@ -119,9 +144,8 @@ class appController
         }
     }
 
-    public function exit()
-    {
-        setcookie('user_name', '', time() - 3600, '/');
+    public function exit(){
+        setcookie('token', '', time() - 3600, '/','',false,true);
 
         session_unset();
         session_destroy();
@@ -130,8 +154,7 @@ class appController
         exit;
     }
 
-    public function shop()
-    {
+    public function shop(){
 
         if (!isset($_COOKIE['user_name'])) {
             header("Location: /");
@@ -144,8 +167,7 @@ class appController
         echo $this->twig->render('shop.html.twig', ['dataShop' => $textoCompra]);
     }
 
-    public function saveShop()
-    {
+    public function saveShop(){
         // Verificamos que exista cookie con el nombre del usuario
         if (!isset($_COOKIE['user_name'])) {
             header("Location: /");

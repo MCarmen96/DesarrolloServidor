@@ -15,12 +15,13 @@ class appController{
         $this->modelUser=new Database();
         $loader=new FilesystemLoader(__DIR__ . "/../View");
         $this->twig=new Environment($loader);
-
+        //comprobamos si sesion start ya se ha inicializado y si no lo esta se inicia
         if(session_status()===PHP_SESSION_NONE){
             session_start();
         }
-
+         // añado una variable global para que este disponible en todas las plnatilla
         $this->twig->addGlobal('state_active', isset($_SESSION['name']));
+        //si existe una session en $session guarda el valor en username
         $this->twig->addGlobal('name', $_SESSION['name'] ?? null);
     }
 

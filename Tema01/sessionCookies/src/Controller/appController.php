@@ -18,11 +18,14 @@ class appController
         $loader = new FilesystemLoader(__DIR__ . "/../View");
         $this->twig = new Environment($loader);
 
+        // Verificamos el estado de la sesión y la iniciamos si aún no está activa (PHP_SESSION_NONE)
         if (session_status() === PHP_SESSION_NONE) {
             session_start();
         }
-
+         // añado una variable global para que este disponible en todas las plnatilla
         $this->twig->addGlobal('state_active', isset($_SESSION['name']));
+
+        // Hace disponible la variable 'name' en Twig. Si $_SESSION['name'] existe, usa su valor; si no, usa null
         $this->twig->addGlobal('name', $_SESSION['name'] ?? null);
     }
 
@@ -41,7 +44,7 @@ class appController
 
         error_log("entra en el function de save user");
         $nameLimpio = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_SPECIAL_CHARS);
-        $pinLimpio = filter_input(INPUT_POST, 'pin', FILTER_SANITIZE_SPECIAL_CHARS);
+        $pinLimpio = filter_input(INPUT_POST, 'pin', FILTER_SANITIZE_SPECIAL_CHARS);//FILTER_UNSAFE_RAW
 
         $hashedPin = password_hash($pinLimpio, PASSWORD_BCRYPT);
 
@@ -70,19 +73,18 @@ class appController
 
         $nameLimpio = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_SPECIAL_CHARS);
         $pinLimpio = filter_input(INPUT_POST, 'pin', FILTER_SANITIZE_SPECIAL_CHARS);
-
-
-
-
         //busco el usuario en la base de datos
         $userData = $this->modelUser->searchUser($nameLimpio);
 
         //si el usuario existe...
         if ($userData) {
+
             //compara el pin introducido con el has de la bbdd
             if (password_verify($pinLimpio, $userData->password)) {
 
+                // establezco la cookie con el nombre del usuario y un nombre a esa cookie setcookie(nombre, valor, expiración, path)
                 setcookie('user_name', $userData->nombre, time() + 3600, '/');
+
                 $_SESSION['name'] = $userData->nombre;
                 $this->twig->addGlobal('state_active', true);
                 $this->twig->addGlobal('name', $userData->nombre);
@@ -103,9 +105,9 @@ class appController
     }
 
     public function exit()
-    {
+    {   //borramos la cookie
         setcookie('user_name', '', time() - 3600, '/');
-
+        //destruimos la sesion
         session_unset();
         session_destroy();
 
@@ -116,7 +118,7 @@ class appController
     public function shop()
     {
 
-        if (!isset($_COOKIE['user_name'])) {
+        if (!isset($_COOKIE['user_name'])&&$_SESSION['name']) {
             header("Location: /");
             exit;
         }
