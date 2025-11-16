@@ -1,0 +1,21 @@
+GET http://localhost:8000/departs
+
+GET http://localhost:8000/departs/40
+
+POST http://localhost:8000/departs/create
+Content-Type: application/json
+{
+    "depart_no":80,
+    "dnombre":"Departamento de Pruebas",
+    "loc":"Madrid"
+}
+
+PUT http://localhost:8000/departs/create
+Content-Type: application/json
+{
+    "depart_no":80,
+    "dnombre":"Departamento de Pruebas",
+    "loc":"Barcelona"
+}
+
+DELETE http://localhost:8000/departs/40

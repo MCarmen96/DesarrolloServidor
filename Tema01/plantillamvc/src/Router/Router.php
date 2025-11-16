@@ -21,10 +21,10 @@ class Router{
 
     public function requestUsers(){
 
-        $method=$_SERVER["REQUEST_METHOD"];
-        $pathCompleto=$_SERVER["REQUEST_URI"];
-        $parteUri=parse_url($pathCompleto);
-        $path=$parteUri['path'] ?? "/";
+        $method=$_SERVER["REQUEST_METHOD"];//GUARDO EL METODO HTTP
+        $pathCompleto=$_SERVER["REQUEST_URI"];//GUARDO LA URI COMPLETA QUE SE UTILIZA PRA ACCEDER A LA PAGINA
+        $parteUri=parse_url($pathCompleto);// GUARDO Y DIVIDO LA URL Y LA DESCOMPONE EN UN ARRAY ASOCIATIVO
+        $path=$parteUri['path'] ?? "/";// ACEDEMOS A LA PARTE LIMPIA DE LA URL LA RUTA LIMPIA
 
         error_log($path);
 
