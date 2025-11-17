@@ -13,11 +13,11 @@ class Router{
 
     public function loadRoutes(){
 
-        $this->routes['GET']["/api/departs"]=["controller"=>"appController","action"=>"getAll"];
-        $this->routes['GET']["/api/departs/{id}"]=["controller"=>"appController","action"=>"getId"];
-        $this->routes['POST']["api/deaprts/create"]=["controller"=>"appController","action"=>"create"];
-        $this->routes['PUT']["api/deaprts/{id}"]=["controller"=>"appController","action"=>"update"];
-        $this->routes['DELETE']["api/deaprts/{id}"]=["controller"=>"appController","action"=>"delete"];
+        $this->routes['GET']["/api/depart"]=["controller"=>"appController","action"=>"getAll"];
+        $this->routes['GET']["/api/depart/{id}"]=["controller"=>"appController","action"=>"getId"];
+        $this->routes['POST']["api/depart/create"]=["controller"=>"appController","action"=>"create"];
+        $this->routes['PUT']["/api/depart/{id}"]=["controller"=>"appController","action"=>"update"];
+        $this->routes['DELETE']["/api/depart/{id}"]=["controller"=>"appController","action"=>"delete"];
         
 
         /*
@@ -32,6 +32,7 @@ class Router{
         $parseUrl=parse_url($_SERVER["REQUEST_URI"]);
 
         $path=rtrim($parseUrl['path'],'/');// quitamos la barra final para dar uniformidad
+        error_log("path:  ".$path);
         $originalPath=$path;
 
         $parts=explode('/',trim($path,'/'));
@@ -48,13 +49,14 @@ class Router{
         if(isset($this->routes[$method][$path])){
 
             $saveRoute=$this->routes[$method][$path];
-            $saveRouteController="app\\Controller\\".$saveRoute["controller"];
+            $saveRouteController="\\app\\Controller\\".$saveRoute["controller"];
             $action=$saveRoute["action"];
             error_log("ruta:".$saveRouteController);
             error_log("metodo: ".$action);
             
             if(class_exists($saveRouteController) && method_exists($saveRouteController,$action)){
-
+                
+                error_log("Entra en el if de class exists??");
                 $controller=new $saveRouteController();
 
                 if($paramValue!==null){
