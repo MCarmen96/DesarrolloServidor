@@ -11,25 +11,44 @@
     <h1>Api</h1>
     <button onclick="giveData()">Ver Departamentos</button>
     <div id="box"></div>
+    <hr>
     <h2>Buscar por id departamento</h2>
     <input type="number" id="id">
-    <button>Buscar</button>
+    <button onclick="fetchId()">Buscar</button>
     <div id="departId"></div>
+    <hr>
+    <h2>Crear nuevo departamento</h2>
+    <form action="">
+        <label for="">Nombre depart
+            <input type="text" id="dnombre">
+        </label>
+        <label for="">Localidad depart
+            <input type="text" id="loc">
+        </label>
+        <label for="">Numero depart
+            <input type="number" id="depart_no">
+        </label>
+        <button onclick="create()">Guardar</button>
+    </form>
+    
 
 
     <script>
 
         let idBox = document.getElementById("box");
+        let departId=document.getElementById("departId");
+        
+
         function view(data) {
             let html = "<ul>";
             for (let i = 0; i < data.length; i++) {
-                html += `<li>${data[i].depart_no} - ${data[i].dnombre} (${data[i].loc})</li>`;
+                html += `<li>${data[i].depart_no} - ${data[i].dnombre} (${data[i].loc}) </li>`;
+                html+=`<button onclick="eliminar(${data[i].depart_no})"">Delete</button>`;
             }
             html += "</ul>";
-
             idBox.innerHTML=html;
-
         }
+
         function giveData() {
             fetch('http://localhost:8000/api/depart/')
                 .then(response => response.json())
@@ -41,6 +60,13 @@
 
         function viewId(data){
 
+            let html = "<ul>";
+            for (let i = 0; i < data.length; i++) {
+                html += `<li>${data[i].depart_no} - ${data[i].dnombre} (${data[i].loc})</li>`;
+            }
+            html += "</ul>";
+
+            departId.innerHTML=html;
         }
 
         function fetchId(){
@@ -54,6 +80,24 @@
                     console.log(data);
                 })
 
+        }
+
+        /*function create(){
+            
+            fetch("http://localhost:8000/api/depart/create")
+                .then(response=>response.json())
+                .then(data=>{
+
+                })
+        }*/
+
+        function eliminar(id){
+
+            fetch(`http://localhost:8000/api/depart/${id}`,{method:"DELETE"})
+                .then(response=>response.json())
+                .then(data=>{
+                    
+                })
         }
         
     </script>

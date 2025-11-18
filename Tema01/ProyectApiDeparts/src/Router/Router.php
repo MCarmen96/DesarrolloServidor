@@ -15,7 +15,7 @@ class Router{
         $this->routes['GET']["/index"]=["controller"=>"appController","action"=>"viewIndex"];
         $this->routes['GET']["/api/depart"]=["controller"=>"appController","action"=>"getAll"];
         $this->routes['GET']["/api/depart/{id}"]=["controller"=>"appController","action"=>"getId"];
-        $this->routes['POST']["api/depart/create"]=["controller"=>"appController","action"=>"create"];
+        $this->routes['POST']["/api/depart/create"]=["controller"=>"appController","action"=>"create"];
         $this->routes['PUT']["/api/depart/{id}"]=["controller"=>"appController","action"=>"update"];
         $this->routes['DELETE']["/api/depart/{id}"]=["controller"=>"appController","action"=>"delete"];
         

@@ -5,22 +5,32 @@ GET http://localhost:8000/api/depart
 GET http://localhost:8000/api/depart/10
 
 ###
+
+
 POST http://localhost:8000/api/depart/create
-Content-Type: application/json
+Content-Type:application/json
+
 {
-    "depart_no":80,
+    "depart_no":20,
     "dnombre":"Departamento de Pruebas",
     "loc":"Madrid"
 }
 
+
+
 ###
-PUT http://localhost:8000/api/depart/create
-Content-Type: application/json
+
+
+PUT http://localhost:8000/api/depart/10
+Content-Type:application/json
+
 {
     "depart_no":80,
     "dnombre":"Departamento de Pruebas",
     "loc":"Barcelona"
 }
+
+
 ###
 
-DELETE http://localhost:8000/api/depart/40
+DELETE http://localhost:8000/api/depart/80

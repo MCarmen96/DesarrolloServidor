@@ -33,21 +33,26 @@ class appController{
         http_response_code(200);
         $departs=$this->database->getId($id);
         echo json_encode($departs);
-        echo json_encode(['mensaje'=> 'Mostrando departemnto con ID: $id']);
+        //echo json_encode(['mensaje'=> `Mostrando departemnto con ID: $id`]);
     }
 
-    public function create($depart_no,$dnombre,$loc){
-        $departs=$this->database->create($depart_no,$dnombre,$loc);
-        echo json_encode($departs);
+    public function create(){
+        //Leer el cuerpo de la petición HTTP (que contiene el JSON)
+        $json=file_get_contents("php://input");
+        $datos=json_decode($json,true);
+        $this->database->create($datos["depart_no"], $datos["dnombre"], $datos["loc"]);
+        echo json_encode($datos);
         http_response_code(200);
-        echo json_encode(['mensaje'=> 'Departemento creado existosamente']);
+        
     }
 
-    public function update($depart_no,$dnombre,$loc){
-        $departs=$this->database->update($depart_no,$dnombre,$loc);
-        echo json_encode($departs);
+    public function update($id){
+        //Leer el cuerpo de la petición HTTP (que contiene el JSON)
+        $datos = json_decode(file_get_contents("php://input"), true);
+        $this->database->update($id, $datos["dnombre"], $datos["loc"]);
+        echo json_encode($datos);
         http_response_code(200);
-        echo json_encode(['mensaje'=> 'Departemento con ID $id actualizado correctamente']);
+        
     }
 
     public function delete($id){
