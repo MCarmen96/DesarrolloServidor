@@ -12,7 +12,7 @@ class Router{
     }
 
     public function loadRoutes(){
-
+        $this->routes['GET']["/index"]=["controller"=>"appController","action"=>"viewIndex"];
         $this->routes['GET']["/api/depart"]=["controller"=>"appController","action"=>"getAll"];
         $this->routes['GET']["/api/depart/{id}"]=["controller"=>"appController","action"=>"getId"];
         $this->routes['POST']["api/depart/create"]=["controller"=>"appController","action"=>"create"];

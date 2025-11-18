@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Api</h1>
+    <button onclick="giveData()">Ver Departamentos</button>
+    <div id="box"></div>
+    <h2>Buscar por id departamento</h2>
+    <input type="number" id="id">
+    <button>Buscar</button>
+    <div id="departId"></div>
+
+
+    <script>
+
+        let idBox = document.getElementById("box");
+        function view(data) {
+            let html = "<ul>";
+            for (let i = 0; i < data.length; i++) {
+                html += `<li>${data[i].depart_no} - ${data[i].dnombre} (${data[i].loc})</li>`;
+            }
+            html += "</ul>";
+
+            idBox.innerHTML=html;
+
+        }
+        function giveData() {
+            fetch('http://localhost:8000/api/depart/')
+                .then(response => response.json())
+                .then(data => {
+                    view(data)
+                    console.log(data);
+                })
+        }
+
+        function viewId(data){
+
+        }
+
+        function fetchId(){
+
+            let id=document.getElementById("id").value;
+
+            fetch(`http://localhost:8000/api/depart/${id}`)
+                .then(response => response.json())
+                .then(data => {
+                    viewId(data)
+                    console.log(data);
+                })
+
+        }
+        
+    </script>
+</body>
+
+</html>

@@ -1,5 +1,5 @@
 {
-    "name": "carmen/plantillamvc",
+    "name": "mariadelcarmengarcianavarro/proyect-api-departs",
     "autoload": {
         "psr-4": {
             "app\\": "src/"
@@ -7,7 +7,7 @@
     },
     "authors": [
         {
-            "name": "MCarmen",
+            "name": "Mcarmen",
             "email": "carmengarcianavarro19@gmail.com"
         }
     ],
@@ -17,4 +17,5 @@
     "scripts": {
         "start":"php -S localhost:8000 -t public"
     }
+
 }

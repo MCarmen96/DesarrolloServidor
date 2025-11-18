@@ -1,7 +1,8 @@
 GET http://localhost:8000/api/depart
 
 ###
-GET http://localhost:8000/api/depart/40
+
+GET http://localhost:8000/api/depart/10
 
 ###
 POST http://localhost:8000/api/depart/create
