@@ -52,9 +52,17 @@ class Database{
         return $depart;
     }
 
-    public function create($depart_no,$dnombre,$loc){
-        return $this->execute("INSERT INTO depart(depart_no, dnombre, loc) VALUES(:depart_no, :dnombre, :loc)", 
-                            ["depart_no" => $depart_no, "dnombre" => $dnombre, "loc" => $loc ]);
+    public function create($depart_no, $dnombre, $loc){
+        //return $this->execute("INSERT INTO depart(depart_no, dnombre, loc) VALUES(:depart_no, :dnombre, :loc)", 
+                            //["depart_no" => $depart_no, "dnombre" => $dnombre, "loc" => $loc ]);
+
+        $sql="INSERT INTO depart (depart_no, dnombre, loc) VALUES (:depart_no, :dnombre, :loc)";
+        
+        return $this->execute($sql,[
+            "depart_no"=>$depart_no,
+            "dnombre"=>$dnombre,
+            "loc"=>$loc
+        ]);
     }
 
     public function update($depart_no,$dnombre,$loc){

@@ -28,8 +28,11 @@
         <label for="">Numero depart
             <input type="number" id="depart_no">
         </label>
-        <button onclick="create()">Guardar</button>
+        
     </form>
+    <button onclick="create()">Guardar</button>
+    
+    <div id="newDepart"></div>
     
 
 
@@ -82,21 +85,38 @@
 
         }
 
-        /*function create(){
-            
-            fetch("http://localhost:8000/api/depart/create")
+        function create(){
+
+            let nombre=document.getElementById("dnombre").value;
+            let id=document.getElementById("depart_no").value;
+            let loc=document.getElementById("loc").value;
+            let idNumber=parseInt(id);
+            let depart={
+                depart_no:idNumber,
+                dnombre:nombre,
+                loc:loc
+            }
+            fetch("http://localhost:8000/api/depart",{
+                method:"POST",
+                headers:{
+                    "Content-Type":"application/json"
+                },
+                body:JSON.stringify(depart)
+            })
                 .then(response=>response.json())
                 .then(data=>{
-
+                    document.getElementById("newDepart").innerHTML=
+                        `<span>Departamento ${depart.dnombre} creado con existo</span>`;
+                        giveData();
                 })
-        }*/
+        }
 
         function eliminar(id){
 
             fetch(`http://localhost:8000/api/depart/${id}`,{method:"DELETE"})
                 .then(response=>response.json())
                 .then(data=>{
-                    
+                    giveData();
                 })
         }
         

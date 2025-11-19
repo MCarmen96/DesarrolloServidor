@@ -40,7 +40,9 @@ class appController{
         //Leer el cuerpo de la petición HTTP (que contiene el JSON)
         $json=file_get_contents("php://input");
         $datos=json_decode($json,true);
+
         $this->database->create($datos["depart_no"], $datos["dnombre"], $datos["loc"]);
+        
         echo json_encode($datos);
         http_response_code(200);
         
