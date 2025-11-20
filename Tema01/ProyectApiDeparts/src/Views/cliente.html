@@ -91,17 +91,13 @@
             let id=document.getElementById("depart_no").value;
             let loc=document.getElementById("loc").value;
             let idNumber=parseInt(id);
-            let depart={
-                depart_no:idNumber,
-                dnombre:nombre,
-                loc:loc
-            }
-            fetch("http://localhost:8000/api/depart",{
+            let depart={depart_no:idNumber,dnombre:nombre,loc:loc};
+            fetch("http://localhost:8000/api/depart/",{
                 method:"POST",
                 headers:{
                     "Content-Type":"application/json"
                 },
-                body:JSON.stringify(depart)
+                body: JSON.stringify(depart)
             })
                 .then(response=>response.json())
                 .then(data=>{

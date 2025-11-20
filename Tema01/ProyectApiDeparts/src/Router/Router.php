@@ -75,7 +75,7 @@ class Router
                     if ($paramValue !== null) {
                         $controller->$action($paramValue,$userData);
                     } else {
-                        $controller->$action();
+                        $controller->$action($userData);
                     }
                 }else{
                     if ($paramValue !== null) {

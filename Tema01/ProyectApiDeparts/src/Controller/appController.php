@@ -13,11 +13,11 @@ class appController{
         $dotenv=Dotenv::createImmutable(__DIR__ . '/../..');
         $dotenv->load();
         $host=$_ENV['DB_HOST'];
-        $name=$_ENV['DB_DATABASE'];
+        $nameData=$_ENV['DB_DATABASE'];
         $root=$_ENV['DB_USERNAME'];
         $pin=$_ENV['DB_PASSWORD'];
-        error_log($name);
-        $this->database=new Database($host,$name,$root,$pin);
+        error_log($nameData);
+        $this->database=new Database($host,$nameData,$root,$pin);
     }
 
     public function viewIndex(){
