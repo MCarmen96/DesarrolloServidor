@@ -9,6 +9,7 @@ GET http://localhost:8000/api/depart/10
 
 POST http://localhost:8000/api/depart/create
 Content-Type:application/json
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMDAiLCJhdWQiOiJodHRwOi8vbG9jYWxob3N0OjgwMDAiLCJpYXQiOjE3NjM2NDQ4MjMsImV4cCI6MTc2MzY0ODQyMywidXNlcl9pZCI6ImNhcm1lbmNodSJ9.cHKDNkhH0zzCeQsszVKQoKcjYNsLXzUZ_6k55b7C9xg
 
 {
     "depart_no":20,
@@ -23,6 +24,7 @@ Content-Type:application/json
 
 PUT http://localhost:8000/api/depart/10
 Content-Type:application/json
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMDAiLCJhdWQiOiJodHRwOi8vbG9jYWxob3N0OjgwMDAiLCJpYXQiOjE3NjM2NDQ4MjMsImV4cCI6MTc2MzY0ODQyMywidXNlcl9pZCI6ImNhcm1lbmNodSJ9.cHKDNkhH0zzCeQsszVKQoKcjYNsLXzUZ_6k55b7C9xg
 
 {
     "depart_no":80,
@@ -33,4 +35,6 @@ Content-Type:application/json
 
 ###
 
-DELETE http://localhost:8000/api/depart/80
+DELETE http://localhost:8000/api/depart/10
+Content-Type:application/json
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMDAiLCJhdWQiOiJodHRwOi8vbG9jYWxob3N0OjgwMDAiLCJpYXQiOjE3NjM2NDQ4MjMsImV4cCI6MTc2MzY0ODQyMywidXNlcl9pZCI6ImNhcm1lbmNodSJ9.cHKDNkhH0zzCeQsszVKQoKcjYNsLXzUZ_6k55b7C9xg

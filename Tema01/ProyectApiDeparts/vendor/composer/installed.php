@@ -3,13 +3,22 @@
         'name' => 'mariadelcarmengarcianavarro/proyect-api-departs',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => 'a0ed772a3f5850c6ae8c2753476b82cc61064e2a',
+        'reference' => '64629dea65b03fac9ae3b40fb593221c3b60027e',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
         'dev' => true,
     ),
     'versions' => array(
+        'firebase/php-jwt' => array(
+            'pretty_version' => 'v6.11.1',
+            'version' => '6.11.1.0',
+            'reference' => 'd1e91ecf8c598d073d0995afa8cd5c75c6e19e66',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../firebase/php-jwt',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
         'graham-campbell/result-type' => array(
             'pretty_version' => 'v1.1.3',
             'version' => '1.1.3.0',
@@ -22,7 +31,7 @@
         'mariadelcarmengarcianavarro/proyect-api-departs' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => 'a0ed772a3f5850c6ae8c2753476b82cc61064e2a',
+            'reference' => '64629dea65b03fac9ae3b40fb593221c3b60027e',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
