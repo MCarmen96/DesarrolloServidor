@@ -9,13 +9,12 @@ class Router
 
     private $routes = [];
 
-    public function __construct()
-    {
+    public function __construct(){
         $this->loadRoutes();
     }
 
-    public function loadRoutes()
-    {
+    public function loadRoutes(){
+
         $this->routes['GET']["/index"] = ["controller" => "appController", "action" => "viewIndex"];
         $this->routes['GET']["/api/depart"] = ["controller" => "appController", "action" => "getAll"];
         $this->routes['GET']["/api/depart/{id}"] = ["controller" => "appController", "action" => "getId"];

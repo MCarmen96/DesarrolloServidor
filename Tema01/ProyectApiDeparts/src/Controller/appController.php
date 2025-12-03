@@ -44,7 +44,7 @@ class appController{
         $this->database->create($datos["depart_no"], $datos["dnombre"], $datos["loc"]);
         
         echo json_encode($datos);
-        echo json_encode(['MENSAJE'=>'Deaprtmento creado exitosamente','Created by'=>$userData['user_id']]);
+        echo json_encode(['MENSAJE'=>'Deapartamento creado exitosamente','Created by'=>$userData['user_id']]);
         http_response_code(200);
         
     }

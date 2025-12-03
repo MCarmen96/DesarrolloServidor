@@ -61,6 +61,8 @@ class Router{
                 echo "NOT FOUND 404 RUTA NO ENCONTRADA";
             }
 
+        }else{
+            echo("NOT FOUND 404 RUTA NO ENCONTRADA");
         }
 
     }
