@@ -17,12 +17,14 @@ return new class extends Migration
             $table->integer('emple_no')->primary();
             $table->string('apellido');
             $table->string('oficio');
-            $table->integer('dir')->foreign('emple_no');
+            $table->integer('dir');
             $table->date('fecha_alt');
             $table->double('salario');
             $table->double('comision');
-            $table->foreign('emple_no')->references('depart_no')->on('departs2')->onDelete('cascade');
-
+            $table->integer('depart_no');
+            $table->foreign('depart_no')->references('depart_no')->on('departs2')->onDelete('cascade');
+            $table->foreign('dir')->references('emple_no')->on('emples')->onDelete('cascade');
+            $table->timestamps();
         });
     }
 

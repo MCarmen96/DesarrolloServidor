@@ -14,7 +14,7 @@ return new class extends Migration
         //
         Schema::create('departs',function (Blueprint $table){
 
-            $table->id();// seria mi depart_no
+            $table->id();// seria mi depart_no por defecto laravel lo hace incrementable de tipo bigint
             $table->string('dnombre');// dnombre
             $table->string('loc');
             $table->timestamps();
