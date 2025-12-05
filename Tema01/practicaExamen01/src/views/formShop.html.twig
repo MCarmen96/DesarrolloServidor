@@ -1,0 +1,10 @@
+{% extends "layout.html.twig" %}
+
+{% block content %}
+
+    <form action="/saveShop" method="post">
+        <textarea name="shop" id="" placeholder="Write here.."> {{compra}} </textarea>
+        <button>Save</button>
+    </form>
+
+{% endblock %}

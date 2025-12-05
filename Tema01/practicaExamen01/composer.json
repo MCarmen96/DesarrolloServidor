@@ -1,0 +1,23 @@
+{
+    "name": "carme/practica-examen01",
+    "autoload": {
+        "psr-4": {
+            "app\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "MCarmen",
+            "email": "carmengarcianavarro19@gmail.com"
+        }
+    ],
+    "require": {
+        "illuminate/database": "^12.41",
+        "twig/twig": "^3.22",
+        "firebase/php-jwt": "^6.11",
+        "vlucas/phpdotenv": "^5.6"
+    },
+    "scripts":{
+        "start":"php -S localhost:8000 -t public"
+    }
+}

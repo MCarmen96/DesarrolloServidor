@@ -1,0 +1,18 @@
+{% extends "layout.html.twig" %}
+
+{% block content %}
+    <h1>Iniciar sesion de usuario</h1>
+    <form action="/loginUser" method="post">
+        <div>
+            <label for="">Nombre
+                <input type="text" name="nameUser">
+            </label>
+            <label for="">Contraseña
+                <input type="password" name="pinUser">
+            </label>
+        </div>
+        <button>Login</button>
+    </form>
+
+
+{% endblock %}

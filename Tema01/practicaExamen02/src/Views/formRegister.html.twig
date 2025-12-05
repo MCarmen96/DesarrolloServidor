@@ -1,0 +1,21 @@
+{% extends "layout.html.twig" %}
+
+{% block content %}
+    <h1>REGISTRO USERS</h1>
+    <form action="/register" method="post">
+        <div>
+            <label for="">Nombre
+                <input type="text" name="name"
+            </label>
+        </div>
+        <br>
+    
+        <div>
+            <label for="">Contraseña
+                <input type="password" name="pin">
+            </label>
+        </div>
+        <br> <button>SAVE</button>
+    </form>
+
+{% endblock %}
