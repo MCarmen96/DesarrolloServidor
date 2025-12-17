@@ -1,3 +1,11 @@
-
-composer require laravel/breeze --dev
-php artisan breeze:install blade
+php artisan migrate
+php artisan storage:link
+php artisan make:controller nombrecontroller
+php artisan make:seeder nombreseeder
+php artisan db:seed
+Para revertir todas las migraciones ejecuta → php artisan migrate:reset
+Para eliminar todas las tablas y volver a aplicar todas las migraciones ejecuta →
+php artisan migrate:fresh
+php artisan config:clear
+php artisan cache:clear
+php artisan key:generate

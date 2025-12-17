@@ -1,5 +1,28 @@
-GET  http://localhost:8000/api/products/1 HTTP/1.1
+GET  http://localhost:8000/api/products/3 HTTP/1.1
 Content-Type: application/json
 
 ###
 
+POST http://localhost:8000/api/products
+Content-Type: application/json
+Accept: application/json
+
+{
+    "nombre":"berenjenas de almagro",
+    "descripcion":"berenjenas y mas cosas",
+    "precio":1099
+}
+
+###
+PUT http://localhost:8000/api/products/2
+Content-Type: application/json
+Accept: application/json
+
+{
+    "nombre":"berenjenas de almagro",
+
+}
+###
+
+DELETE http://localhost:8000/api/products/1
+Accept: application/json

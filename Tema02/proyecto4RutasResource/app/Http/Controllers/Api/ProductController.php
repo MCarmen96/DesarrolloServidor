@@ -23,7 +23,16 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         //
-        
+        $request->validate([
+            'nombre'=>'required|string|max:255',
+            'descripcion'=>'nullable|string|max:255',
+            'precio'=>'required|numeric',
+            'foto'=>'nullable|string'
+        ]);
+
+        $product=Product::created($request->all());
+        return response()->json($product,201);
+
     }
 
     /**
@@ -32,6 +41,8 @@ class ProductController extends Controller
     public function show(string $id)
     {
         //
+        $product=Product::findOrFail($id);
+        return response()->json($product,200);
     }
 
     /**
@@ -40,6 +51,17 @@ class ProductController extends Controller
     public function update(Request $request, string $id)
     {
         //
+        $product=Product::findOrFail($id);
+        $request->validate([
+            'nombre'=>'required|string|max:255',
+            'descripcion'=>'nullable|string|max:255',
+            'precio'=>'required|float',
+            'foto'=>'nullable|string'
+        ]);
+
+        $product->update($request->all());
+        return response()->json($product,200);
+
     }
 
     /**
@@ -48,5 +70,7 @@ class ProductController extends Controller
     public function destroy(string $id)
     {
         //
+        Product::destroy($id);
+        return response()->json(null,204);
     }
 }
