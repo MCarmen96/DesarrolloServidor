@@ -18,6 +18,7 @@ class Emple extends Model
         "salario",
         "comision",
         "depart_no",
+        "foto"
     ];
 
     public function depart()

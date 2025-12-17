@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\DepartController;
+use App\Http\Controllers\EmpleController;
 use App\Http\Controllers\MiController;
 use Illuminate\Support\Facades\Route;
 
@@ -14,6 +16,9 @@ Route::get('/saludo/{nombre?}',[MiController::class,'saludar']);
 Route::get('/departamento/{depart_no}',[MiController::class,'mostrar']);
 Route::get('/Form',[MiController::class,'mostrarForm']);
 Route::post('/procesarForm',[MiController::class,'procesarForm']);
+
+Route::resource('departs',DepartController::class);
+Route::resource('emples',EmpleController::class);
 
 
 

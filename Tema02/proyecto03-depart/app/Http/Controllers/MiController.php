@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use app\Models\Depart;
+use App\Models\Depart;
 use Illuminate\Http\Request;
 
 class MiController extends Controller
@@ -38,5 +38,5 @@ class MiController extends Controller
 
         return redirect('/Form')->with('success','Datos introducidos correctamente');
     }
-    
+
 }
