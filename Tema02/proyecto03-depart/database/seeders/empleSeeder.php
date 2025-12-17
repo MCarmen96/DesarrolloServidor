@@ -5,15 +5,14 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-class empleSeeder extends Seeder
+
+class EmpleSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        //
-
         DB::statement("
             INSERT INTO emples VALUES
                 (7839,'REY','PRESIDENTE',NULL,'1991-11-17', 4100,NULL,10),

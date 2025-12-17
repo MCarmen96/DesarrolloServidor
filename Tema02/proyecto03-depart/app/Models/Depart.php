@@ -6,14 +6,18 @@ use Illuminate\Database\Eloquent\Model;
 
 class Depart extends Model
 {
-    //
-    protected $fillable=['depart_no','dnombre','loc'];
-    protected $table='departs';
-    protected $primaryKey='depart_no';
+    // protected $table = "departs2";
     public $incrementing = false;
-    // un departamento tiene muchos empleados
-    public function emple(){
-        return $this->hasMany(Emple::class,'depart_no');
-    }
+    protected $primaryKey = "depart_no";
+    public $timestamps = false;
+    protected $fillable = [
+        "depart_no",
+        "dnombre",
+        "loc",
+    ];
 
+    public function emple()
+    {
+        return $this->hasMany(Emple::class, "depart_no");
+    }
 }
