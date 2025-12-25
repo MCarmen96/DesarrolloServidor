@@ -26,11 +26,11 @@ class ProductController extends Controller
         $request->validate([
             'nombre'=>'required|string|max:255',
             'descripcion'=>'nullable|string|max:255',
-            'precio'=>'required|numeric',
-            'foto'=>'nullable|string'
+            'precio'=>'required|numeric'
+
         ]);
 
-        $product=Product::created($request->all());
+        $product=Product::create($request->all());
         return response()->json($product,201);
 
     }
@@ -55,7 +55,7 @@ class ProductController extends Controller
         $request->validate([
             'nombre'=>'required|string|max:255',
             'descripcion'=>'nullable|string|max:255',
-            'precio'=>'required|float',
+            'precio'=>'required|numeric',
             'foto'=>'nullable|string'
         ]);
 
