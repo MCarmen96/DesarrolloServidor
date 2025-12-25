@@ -9,3 +9,10 @@ php artisan migrate:fresh
 php artisan config:clear
 php artisan cache:clear
 php artisan key:generate
+
+php artisan vendor:publish --provider="Laravel\Sanctum\SanctumServiceProvider"
+
+php artisan vendor:publish --provider="Laravel\Sanctum\SanctumServiceProvider"
+ 1120  php artisan migrate
+ 1121  php artisan make:controller AuthController
+ 1122  php artisan tinker
