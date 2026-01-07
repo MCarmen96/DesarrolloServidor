@@ -1,9 +1,8 @@
 GET  http://127.0.0.1:8000/api/products HTTP/1.1
-Authorization: Bearer 3|QFLFQDi1oHIKWqTH1Ub1xzKoODM33cHJZnwKyZ59842dda7c
+Authorization: Bearer 1|c1etEl9Nar8Tdup9Z6JzbN6U3dgJwAaWHleCmSH24864254a
 Accept: application/json
 
 ###
-
 POST http://127.0.0.1:8000/api/products
 Content-Type: application/json
 Accept: application/json
@@ -15,20 +14,40 @@ Accept: application/json
 }
 
 ###
-
 POST http://127.0.0.1:8000/api/login
+Content-Type: application/json
+Accept: application/json
+Authorization: Bearer 5|MNKO8ZsLhOX1JIOx2fcgU7mlAuoMIB6fzUPUBcUscb62b70f
+
+{
+    "email":"carmen2@gmail.com",
+    "password":"password"
+}
+
+###
+
+POST http://127.0.0.1:8000/api/logout
+Content-Type: application/json
+Accept: application/json
+Authorization: Bearer 5|MNKO8ZsLhOX1JIOx2fcgU7mlAuoMIB6fzUPUBcUscb62b70f
+
+###
+POST http://127.0.0.1:8000/api/register
 Content-Type: application/json
 Accept: application/json
 
 {
-    "email":"carmen@gmail.com",
+    "name":"carmen",
+    "email":"carmen2@gmail.com",
     "password":"password"
 }
+
 
 ###
 PUT  http://127.0.0.1:8000/api/products/2
 Content-Type: application/json
 Accept: application/json
+
 
 {
     "nombre":"berenjenasDFSD",

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
-use App\Model\User;
+use App\Models\User;
 class AuthController extends Controller
 {
     //
@@ -29,6 +29,24 @@ class AuthController extends Controller
     public function logout(Request $request){
         $request->user()->tokens()->delete();
         return response()->json(['message'=>'logged out']);
+    }
+
+    public function register(Request $request){
+
+        $credentials = $request->validate([
+            "name"=>"required",
+            "email" => "required|email|unique:users,email",
+            "password" => "required"
+        ]);
+
+        $user =User::create([
+            "name"=>$credentials["name"],
+            "email" => $credentials["email"],
+            "password" => bcrypt($credentials["password"])
+        ]);
+
+        $token = $user->createToken("auth_token")->plainTextToken;
+        return response()->json(["access_token" => $token, "token_type" => "Bearer"]);
     }
 
 }
