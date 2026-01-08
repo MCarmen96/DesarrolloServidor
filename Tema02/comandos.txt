@@ -1,3 +1,4 @@
+composer create-project laravel/laravel
 php artisan migrate
 php artisan storage:link
 php artisan make:controller nombrecontroller
@@ -16,3 +17,9 @@ php artisan vendor:publish --provider="Laravel\Sanctum\SanctumServiceProvider"
  1120  php artisan migrate
  1121  php artisan make:controller AuthController
  1122  php artisan tinker
+
+
+ composer require laravel/breeze - -dev
+ php artisan breeze:install blade
+
+ docker-compose up -d
