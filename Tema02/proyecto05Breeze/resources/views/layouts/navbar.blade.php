@@ -1,41 +1,50 @@
-<div class="container">
-    <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
-        <div class="col-md-3 mb-2 mb-md-0">
-            <a href="{{ url('/') }}" class="d-inline-flex link-body-emphasis text-decoration-none">
-                <svg class="bi" width="40" height="32" role="img" aria-label="Bootstrap">
-                    <use xlink:href="#bootstrap"></use>
-                </svg>
+<nav class="bg-white border-b-[6px] border-black px-4 py-4 mb-8">
+    <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between">
+
+        <div class="flex items-center">
+            <a href="{{ url('/') }}" class="text-2xl font-[1000] italic tracking-tighter text-black">
+                PRIETO<span class="text-[#FF5722]">EATS</span>
             </a>
         </div>
 
-        <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-            <li><a href="{{ url('/') }}" class="nav-link px-2 link-secondary">Home</a></li>
-            <li><a href="#" class="nav-link px-2">Features</a></li>
-            <li><a href="#" class="nav-link px-2">Pricing</a></li>
-            <li><a href="#" class="nav-link px-2">FAQs</a></li>
-            <li><a href="#" class="nav-link px-2">About</a></li>
+        <ul class="hidden md:flex space-x-8">
+            <li><a href="{{ url('/') }}" class="font-black text-sm uppercase hover:text-[#FF5722] transition-colors">Home</a></li>
+            <li><a href="#" class="font-black text-sm uppercase hover:text-[#FF5722] transition-colors">Features</a></li>
+            <li><a href="#" class="font-black text-sm uppercase hover:text-[#FF5722] transition-colors">Pricing</a></li>
+            <li><a href="#" class="font-black text-sm uppercase hover:text-[#FF5722] transition-colors">About</a></li>
         </ul>
 
-        <div class="col-md-3 text-end">
+        <div class="flex items-center gap-4">
             @if (Route::has('login'))
                 @auth
-                    {{-- Si el usuario está logueado, lo mandamos al Dashboard --}}
-                    <a href="{{ url('/dashboard') }}" class="btn btn-outline-primary">Dashboard</a>
+                    {{-- Usuario Logueado --}}
+                    <a href="{{ url('/dashboard') }}"
+                       class="bg-yellow-300 border-4 border-black px-4 py-2 rounded-xl font-black text-xs uppercase shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-none transition-all">
+                        Dashboard
+                    </a>
 
-                    {{-- Botón de Logout (Opcional pero recomendado) --}}
-                    <form method="POST" action="{{ route('logout') }}" class="d-inline">
+                    <form method="POST" action="{{ route('logout') }}" class="inline">
                         @csrf
-                        <button type="submit" class="btn btn-danger ms-2">Log out</button>
+                        <button type="submit"
+                                class="bg-red-500 text-white border-4 border-black px-4 py-2 rounded-xl font-black text-xs uppercase shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-none transition-all">
+                            Saca el hambre (Logout)
+                        </button>
                     </form>
                 @else
-                    {{-- Si no está logueado, botones de Login y Registro --}}
-                    <a href="{{ route('login') }}" class="btn btn-outline-primary me-2">Login</a>
+                    {{-- Usuario Invitado --}}
+                    <a href="{{ route('login') }}"
+                       class="font-black text-sm uppercase px-4 py-2 border-4 border-transparent hover:border-black rounded-xl transition-all">
+                        Login
+                    </a>
 
                     @if (Route::has('register'))
-                        <a href="{{ route('register') }}" class="btn btn-primary">Sign-up</a>
+                        <a href="{{ route('register') }}"
+                           class="bg-[#FF5722] text-white border-4 border-black px-6 py-2 rounded-xl font-black text-sm uppercase shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-none transition-all">
+                            ¡Regístrate!
+                        </a>
                     @endif
                 @endauth
             @endif
         </div>
-    </header>
-</div>
+    </div>
+</nav>
