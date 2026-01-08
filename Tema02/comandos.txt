@@ -23,3 +23,6 @@ php artisan vendor:publish --provider="Laravel\Sanctum\SanctumServiceProvider"
  php artisan breeze:install blade
 
  docker-compose up -d
+
+ npm run dev
+ npm run build

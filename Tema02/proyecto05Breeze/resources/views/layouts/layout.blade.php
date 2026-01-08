@@ -8,11 +8,11 @@
 </head>
 <body>
 
-    @include('navbar')
+    @include('layouts.navbar')
 
     @yield('content')
 
-    @include('footer')
+    @include('layouts.footer')
 
 </body>
 </html>
