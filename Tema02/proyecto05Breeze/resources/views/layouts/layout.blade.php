@@ -6,17 +6,13 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name', 'Prieto Eats') }}</title>
-
-    <link rel="preconnect" href="https://fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600,900&display=swap" rel="stylesheet" />
-
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
 </head>
-<body class="font-sans antialiased bg-[#FF5722]"> {{-- Fondo naranja para coherencia --}}
+<body >
 
     <div class="min-h-screen">
-       
-        @include('layouts.navbar')
+
+        @include('layouts.navBarBoots')
 
         <main>
             @yield('content')

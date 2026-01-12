@@ -1,6 +1,9 @@
 composer create-project laravel/laravel
-php artisan migrate
+php artisan migrate 
 php artisan storage:link
+
+php artisan make:migration nombreTabla
+
 php artisan make:controller nombrecontroller
 php artisan make:seeder nombreseeder
 php artisan db:seed
@@ -26,3 +29,4 @@ php artisan vendor:publish --provider="Laravel\Sanctum\SanctumServiceProvider"
 
  npm run dev
  npm run build
+ docker exec -it proyecto05breeze psql -U admin123 -d proyecto05breeze

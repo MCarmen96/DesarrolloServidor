@@ -15,11 +15,13 @@
         </ul>
 
         <div class="flex items-center gap-4">
+
             @if (Route::has('login'))
+            
                 @auth
                     {{-- Usuario Logueado --}}
                     <a href="{{ url('/dashboard') }}"
-                       class="bg-yellow-300 border-4 border-black px-4 py-2 rounded-xl font-black text-xs uppercase shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-none transition-all">
+                        class="bg-yellow-300 border-4 border-black px-4 py-2 rounded-xl font-black text-xs uppercase shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-none transition-all">
                         Dashboard
                     </a>
 
@@ -43,7 +45,9 @@
                             ¡Regístrate!
                         </a>
                     @endif
+
                 @endauth
+
             @endif
         </div>
     </div>

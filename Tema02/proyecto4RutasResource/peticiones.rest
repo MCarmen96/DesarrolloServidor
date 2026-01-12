@@ -1,14 +1,15 @@
 GET  http://127.0.0.1:8000/api/products HTTP/1.1
-Authorization: Bearer 1|c1etEl9Nar8Tdup9Z6JzbN6U3dgJwAaWHleCmSH24864254a
+Authorization: Bearer 5|IosAQrUkfvmSceEwggjahrhjMuwsFk7fRbZm4Vtdf8a7f32e
 Accept: application/json
 
 ###
 POST http://127.0.0.1:8000/api/products
+Authorization: Bearer 5|IosAQrUkfvmSceEwggjahrhjMuwsFk7fRbZm4Vtdf8a7f32e
 Content-Type: application/json
 Accept: application/json
 
 {
-    "nombre":"berenjenas ",
+    "nombre":"berenjenas klsdjfksd",
     "descripcion":"berenjenas y mas cosas",
     "precio":10.99
 }
@@ -17,10 +18,10 @@ Accept: application/json
 POST http://127.0.0.1:8000/api/login
 Content-Type: application/json
 Accept: application/json
-Authorization: Bearer 5|MNKO8ZsLhOX1JIOx2fcgU7mlAuoMIB6fzUPUBcUscb62b70f
+Authorization: Bearer 5|IosAQrUkfvmSceEwggjahrhjMuwsFk7fRbZm4Vtdf8a7f32e
 
 {
-    "email":"carmen2@gmail.com",
+    "email":"carmen3@gmail.com",
     "password":"password"
 }
 
@@ -29,7 +30,7 @@ Authorization: Bearer 5|MNKO8ZsLhOX1JIOx2fcgU7mlAuoMIB6fzUPUBcUscb62b70f
 POST http://127.0.0.1:8000/api/logout
 Content-Type: application/json
 Accept: application/json
-Authorization: Bearer 5|MNKO8ZsLhOX1JIOx2fcgU7mlAuoMIB6fzUPUBcUscb62b70f
+Authorization: Bearer 5|IosAQrUkfvmSceEwggjahrhjMuwsFk7fRbZm4Vtdf8a7f32e
 
 ###
 POST http://127.0.0.1:8000/api/register
@@ -37,14 +38,15 @@ Content-Type: application/json
 Accept: application/json
 
 {
-    "name":"carmen",
-    "email":"carmen2@gmail.com",
+    "name":"carmen2",
+    "email":"carmen3@gmail.com",
     "password":"password"
 }
 
 
 ###
-PUT  http://127.0.0.1:8000/api/products/2
+PUT  http://127.0.0.1:8000/api/products/3
+Authorization: Bearer 5|IosAQrUkfvmSceEwggjahrhjMuwsFk7fRbZm4Vtdf8a7f32e
 Content-Type: application/json
 Accept: application/json
 
@@ -57,7 +59,12 @@ Accept: application/json
 
 ###
 
-DELETE http://127.0.0.1:8000/api/products/2
+DELETE http://127.0.0.1:8000/api/products/3
+Authorization: Bearer 5|IosAQrUkfvmSceEwggjahrhjMuwsFk7fRbZm4Vtdf8a7f32e
 Accept: application/json
 
 ###
+
+GET  http://127.0.0.1:8000/api/products/3
+Authorization: Bearer 5|IosAQrUkfvmSceEwggjahrhjMuwsFk7fRbZm4Vtdf8a7f32e
+Accept: application/json
