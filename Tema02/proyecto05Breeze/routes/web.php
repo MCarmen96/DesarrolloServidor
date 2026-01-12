@@ -3,11 +3,11 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
+/*Route::get('/', function () {
     return view('home');
-});
+});*/
 
-Route::get('/home', function () {
+Route::get('/', function () {
     return view('home');
 })->middleware(['auth', 'verified'])->name('home');
 

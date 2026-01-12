@@ -22,12 +22,14 @@
                 </div>
 
                 <div>
+                    
                     <div class="flex justify-between items-center mb-2 px-2">
                         <label class="text-black font-[900] text-xs uppercase">Tu Clave</label>
                         @if (Route::has('password.request'))
                             <a href="{{ route('password.request') }}" class="text-[10px] font-bold text-gray-400 hover:text-black uppercase">¿Olvido?</a>
                         @endif
                     </div>
+
                     <input id="password" type="password" name="password" required
                             class="w-full border-4 border-black p-4 rounded-2xl font-black focus:bg-yellow-50 outline-none transition-all shadow-[4px_4px_0px_0px_rgba(0,0,0,0.1)]">
                     <x-input-error :messages="$errors->get('password')" class="font-bold text-red-600 mt-1" />
