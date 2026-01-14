@@ -14,11 +14,10 @@ return new class extends Migration
         //
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->integer('user_id');
-            $table->varchar('status');
-            $table->float('total');
-            $table->timestamps('created_at')->nullable();
-            $table->timestamps('update_at')->nullable();
+            $table->foreignId('user_id')->constrained();
+            $table->string('status',200);
+            $table->decimal('total',10,2);
+            $table->timestamps();
 
         });
     }

@@ -14,14 +14,14 @@ return new class extends Migration
         //
         Schema::create('order_items', function (Blueprint $table) {
             $table->id();
-            $table->integer('order_id');
-            $table->integer('product_id');
+            //RECUERDA QUE SE SOLO SE INDICA LA FOREING KEY YA QUE LA PRIMARY KEY COGE EL ID POR DEFECTO
+            $table->foreignId('order_id')->constrained();
+            $table->foreignId('product_id')->constrained();
             $table->integer('quantity');
-            $table->float('unit_price');
-            $table->timestamps();
+            $table->decimal('unit_price');
             $table->timestamps();
 
-            $table->foreing('order_id')->references('order')->on('orders');
+
         });
     }
 

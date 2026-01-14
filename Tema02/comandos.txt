@@ -13,20 +13,23 @@ php artisan migrate:fresh
 php artisan config:clear
 php artisan cache:clear
 php artisan key:generate
-
+php artisan make:model nombreModelo
 php artisan vendor:publish --provider="Laravel\Sanctum\SanctumServiceProvider"
 
-php artisan vendor:publish --provider="Laravel\Sanctum\SanctumServiceProvider"
- 1120  php artisan migrate
- 1121  php artisan make:controller AuthController
- 1122  php artisan tinker
+Si quieres borrar toda la información de la base de datos para comenzar desde 0 tendrías
+que ejecutar:
+• php artisan migrate:fresh
+• php artisan db:seed
+1120  php artisan migrate
+1121  php artisan make:controller AuthController
+1122  php artisan tinker
 
 
- composer require laravel/breeze - -dev
- php artisan breeze:install blade
+composer require laravel/breeze - -dev
+php artisan breeze:install blade
 
- docker-compose up -d
+docker-compose up -d
 
- npm run dev
- npm run build
- docker exec -it proyecto05breeze psql -U admin123 -d proyecto05breeze
+npm run dev
+npm run build
+docker exec -it proyecto05breeze psql -U admin123 -d proyecto05breeze
