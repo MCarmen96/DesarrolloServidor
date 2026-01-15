@@ -12,7 +12,7 @@ class ProductController extends Controller
     {
         $menus = Product::where("product_type", "menu")->get();
         $dishes = Product::where("product_type", "dish")->get();
-        return view("home", compact("menus", "dishes"));
+        return view("home", compact ("menus", "dishes") );
     }
 
 }
