@@ -19,47 +19,69 @@
         </ul>
 
         <div class="tab-content" id="productTabsContent">
-            dd($menus);
-            @foreach($menus as $menu)
+
+
                 <div class="tab-pane fade show active" id="menus" role="tabpanel" aria-labelledby="menus-tab">
                     <div class="row">
+                    @foreach($menus as $menu)
                         <div class="col-md-4">
                             <div class="card border-light shadow-sm">
-                                <img src="{{'$menu->imagen'}}" class="card-img-top" alt="Menú">
+                                <img src="{{asset($menu->image)}}" class="card-img-top" alt="Menú">
                                 <div class="card-body">
                                     <h5 class="card-title text-success fw-bold">{{$menu->name}}</h5>
-                                    <p class="card-text text-muted small">{{$menu->desciption}}</p>
+                                    <p class="card-text text-muted small">{{$menu->description}}</p>
                                     <ul class="list-unstyled">
                                         <li><strong>Precio:</strong> {{$menu->price}}</li>
                                         <li><strong>Fecha:</strong> {{$menu->date}}</li>
                                     </ul>
-                                    <a href="{{route('login')}}" class="text-danger text-decoration-none small">Inicia sesión para comprar</a>
+
+                                    @auth
+                                        <form action="" method="POST" class="mt-2">
+                                            @csrf
+                                            <button type="submit" class="btn btn-sm btn-primary">
+                                                Añadir al carrito
+                                            </button>
+                                        </form>
+                                    @else
+                                        <a href="{{route('login')}}" class="text-danger text-decoration-none small">Inicia sesión para comprar</a>
+                                    @endauth
                                 </div>
                             </div>
                         </div>
+                    @endforeach
                     </div>
                 </div>
-            @endforeach
 
-            @foreach($dishes as $dish)
+
+
             <div class="tab-pane fade" id="platos" role="tabpanel" aria-labelledby="platos-tab">
                 <div class="row">
+                @foreach($dishes as $dish)
                     <div class="col-md-4">
                         <div class="card border-light shadow-sm">
-                            <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="Plato">
+                            <img src="{{asset($dish->image)}}" class="card-img-top" alt="Plato">
                             <div class="card-body">
-                                <h5 class="card-title text-success fw-bold">Pastel de Patata</h5>
-                                <p class="card-text text-muted small">Ración individual artesana.</p>
+                                <h5 class="card-title text-success fw-bold">{{$dish->name}}</h5>
+                                <p class="card-text text-muted small">{{$dish->description}}</p>
                                 <ul class="list-unstyled">
-                                    <li><strong>Precio:</strong> 3.25 €</li>
+                                    <li><strong>Precio:</strong> {{$dish->price}} €</li>
+                                    <li><strong>Fecha:</strong> {{$dish->date}}</li>
                                 </ul>
-                                <a href="#" class="text-danger text-decoration-none small">Inicia sesión para comprar</a>
+                                <a href="{{route('login')}}" class="text-danger text-decoration-none small">Inicia sesión para comprar</a>
+                                @auth
+                                        <form action="" method="POST" class="mt-2">
+                                            @csrf
+                                            <button type="submit" class="btn btn-sm btn-primary">
+                                                Añadir al carrito
+                                            </button>
+                                        </form>
+                                @endauth
                             </div>
                         </div>
                     </div>
+                @endforeach
                 </div>
             </div>
-            @endforeach
         </div>
     </div>
 @endsection

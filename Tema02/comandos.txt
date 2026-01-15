@@ -28,8 +28,9 @@ que ejecutar:
 composer require laravel/breeze - -dev
 php artisan breeze:install blade
 
-docker-compose up -d
+
 
 npm run dev
 npm run build
+docker-compose up -d
 docker exec -it proyecto05breeze psql -U admin123 -d proyecto05breeze
