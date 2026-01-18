@@ -16,12 +16,13 @@
                 </li>
 
                 @auth
+
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             {{ Auth::user()->name }}
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Pedidos</a></li>
+                            <li><a class="dropdown-item" href="{{ route('cart.orders') }}" >Pedidos</a></li>
                             <li>
                                 <form method="POST" action="{{ route('logout') }}" class="d-inline">
                                     @csrf
@@ -32,6 +33,7 @@
                             </li>
                         </ul>
                     </li>
+
                 @endauth
 
                 @guest
@@ -70,7 +72,7 @@
                             {{Auth::user()->name}}
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end">
-                            <li><a class="dropdown-item" href="#">Pedidos</a></li>
+                            <li><a class="dropdown-item" href="{{ route('cart.orders') }}">Pedidos</a></li>
                             <li>
                                 <form method="POST" action="{{ route('logout') }}" class="inline">
                                     @csrf

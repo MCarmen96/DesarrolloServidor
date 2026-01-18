@@ -120,4 +120,11 @@ class CartController extends Controller
 
         return redirect()->route('cart.index')->with('success', 'Pedido realizado con éxito!!');
     }
+
+    public function orders()
+    {
+        // Busca pedidos del usuario y carga "en cascada" sus líneas (order_items) y los datos de cada producto (product) para evitar múltiples consultas a la BD.
+        $orders = Order::where('user_id', Auth::id())->with('order_items.product')->get();//
+        return view('cart.orders', compact('orders'));
+    }
 }
