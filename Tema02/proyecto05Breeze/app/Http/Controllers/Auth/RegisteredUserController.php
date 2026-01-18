@@ -45,6 +45,8 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
+        session()->flash('mensaje', '¡Registro completado! Bienvenido '.$user->name.'.');
+        
         return redirect(route('home', absolute: false));
     }
 }

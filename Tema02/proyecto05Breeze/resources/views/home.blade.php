@@ -1,6 +1,13 @@
 @extends('layouts.layout')
 @section('content')
     <div class="container mt-5">
+        @if(session('mensaje'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{ session('mensaje') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif
+
         <ul class="nav nav-tabs justify-content-center border-bottom-0 mb-4" id="productTabs" role="tablist">
             <li class="nav-item" role="presentation">
                 <button class="nav-link active bg-success text-white px-4 me-2" id="menus-tab"
@@ -36,7 +43,7 @@
                                     </ul>
 
                                     @auth
-                                        <form action="" method="POST" class="mt-2">
+                                        <form action="{{route('cart.add', $menu->id)}}" method="POST" class="mt-2">
                                             @csrf
                                             <button type="submit" class="btn btn-sm btn-primary">
                                                 Añadir al carrito
@@ -67,14 +74,15 @@
                                     <li><strong>Precio:</strong> {{$dish->price}} €</li>
                                     <li><strong>Fecha:</strong> {{$dish->date}}</li>
                                 </ul>
-                                <a href="{{route('login')}}" class="text-danger text-decoration-none small">Inicia sesión para comprar</a>
                                 @auth
-                                        <form action="" method="POST" class="mt-2">
-                                            @csrf
-                                            <button type="submit" class="btn btn-sm btn-primary">
-                                                Añadir al carrito
-                                            </button>
-                                        </form>
+                                    <form action="{{route('cart.add', $dish->id)}}" method="POST" class="mt-2">
+                                        @csrf
+                                        <button type="submit" class="btn btn-sm btn-primary">
+                                            Añadir al carrito
+                                        </button>
+                                    </form>
+                                @else
+                                    <a href="{{route('login')}}" class="text-danger text-decoration-none small">Inicia sesión para comprar</a>
                                 @endauth
                             </div>
                         </div>
