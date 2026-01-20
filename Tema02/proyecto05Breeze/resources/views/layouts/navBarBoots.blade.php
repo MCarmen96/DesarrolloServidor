@@ -16,7 +16,20 @@
                 </li>
 
                 @auth
+                    @if(Auth::user->isAdmin())
 
+                    <li class="nav-item">
+                        <a class="nav-link" href="" role="button"> {{ Auth::user()->name }}</a>
+
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="{{ route('home') }}">
+                            Productos
+                        </a>
+                    </li>
+
+                    @endif
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             {{ Auth::user()->name }}
@@ -35,6 +48,8 @@
                     </li>
 
                 @endauth
+
+
 
                 @guest
                     <li class="nav-item">

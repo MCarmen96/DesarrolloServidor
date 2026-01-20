@@ -2,6 +2,8 @@ composer create-project laravel/laravel
 php artisan migrate 
 php artisan storage:link
 
+php artisan make:controller AdminController --resource
+
 php artisan make:migration nombreTabla
 
 php artisan make:controller nombrecontroller
