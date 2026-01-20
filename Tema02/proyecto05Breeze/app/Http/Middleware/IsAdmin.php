@@ -16,7 +16,10 @@ class IsAdmin
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if(Auth::check() && Auth::user()->isAdmin()){
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+
+        if($user && $user->isAdmin()){
             return $next($request);
         }
 
