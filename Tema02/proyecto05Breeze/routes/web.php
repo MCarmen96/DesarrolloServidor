@@ -35,6 +35,7 @@ Route::middleware(['auth','isAdmin'])->prefix('admin')->name('admin.')->group(fu
 
     //Route::get('/products/index',[AdminController::class,'index'])->name('products.index');
     Route::resource('products',AdminController::class);
+    // resource crea automáticamente estas 7 rutas RESTful que se corresponden con las operaciones CRUD típicas.
 
 });
 

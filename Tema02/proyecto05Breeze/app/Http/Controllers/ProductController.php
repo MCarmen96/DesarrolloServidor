@@ -10,9 +10,10 @@ class ProductController extends Controller
 
     public function home()
     {
-        $menus = Product::where("product_type", "menu")->get();
-        $dishes = Product::where("product_type", "dish")->get();
-        return view("home", compact ("menus", "dishes") );
+
+        //$menus = Product::where("product_type", "menu")->get();
+        $dishes = Product::all();
+        return view("home", compact ("dishes") );
     }
 
 }

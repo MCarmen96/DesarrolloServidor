@@ -7,18 +7,17 @@ use Illuminate\Http\Request;
 class AdminController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Muestra el listado de todos los productos (página principal del admin).
      */
     public function index()
     {
         //
-        $menus = Product::where("product_type", "menu")->get();
-        $dishes = Product::where("product_type", "dish")->get();
-        return view("home", compact ("menus", "dishes") );
+        $dishes = Product::all();
+        return view("admin.index", compact ("dishes") );
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Muestra el formulario para crear un nuevo producto.
      */
     public function create()
     {
@@ -26,7 +25,7 @@ class AdminController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Guarda el nuevo producto en la base de datos (aquí va la validación).
      */
     public function store(Request $request)
     {
@@ -34,7 +33,7 @@ class AdminController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Muestra los detalles de un producto específico (por ejemplo, para ver fichas).
      */
     public function show(string $id)
     {
@@ -42,7 +41,7 @@ class AdminController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Muestra el formulario para editar un producto ya existente.
      */
     public function edit(string $id)
     {
@@ -50,7 +49,7 @@ class AdminController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Actualiza los datos del producto en la base de datos.
      */
     public function update(Request $request, string $id)
     {
@@ -58,7 +57,7 @@ class AdminController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Elimina permanentemente un producto de la base de datos.
      */
     public function destroy(string $id)
     {

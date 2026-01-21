@@ -1,4 +1,4 @@
-composer create-project laravel/laravel
+phcomposer create-project laravel/laravel
 php artisan migrate 
 php artisan storage:link
 

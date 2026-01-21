@@ -16,13 +16,10 @@ class IsAdmin
      */
     public function handle(Request $request, Closure $next): Response
     {
-        /** @var \App\Models\User $user */
-        $user = Auth::user();
-
-        if($user && $user->isAdmin()){
+        if(Auth::check() && Auth::user()->isAdmin()){
             return $next($request);
         }
 
-        abort(403,'Acceso no autorizado');
+        abort(403, "Acceso no autorizado");
     }
 }
