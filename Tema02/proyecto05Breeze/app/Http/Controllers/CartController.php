@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Product;
 use App\Models\Order;
-use App\Models\Order_Item;
+use App\Models\ProductOrder;
 use Illuminate\Http\Request;
 
 
@@ -77,6 +77,7 @@ class CartController extends Controller
     {
         $cart = session()->get('cart', []);
         $idProduct = (int)$id;
+        
         if (isset($cart[$idProduct]) && $cart[$idProduct]['quantity'] > 1) {
             $cart[$idProduct]['quantity']--;
             session()->put('cart', $cart);
@@ -97,7 +98,6 @@ class CartController extends Controller
 
         $order = Order::create([
             'user_id' => Auth::id(),
-            'status' => 'pendiente',
             'total' => 0
         ]);
 
@@ -105,11 +105,10 @@ class CartController extends Controller
 
         foreach ($cart as $key => $product) {
             $precioTotal += $product["quantity"] * $product["price"];
-            Order_Item::create([
+            ProductOrder::create([
                 "order_id" => $order->id,
                 "product_id" => $key,
-                "quantity" => $product["quantity"],
-                "unit_price" => $product["price"],
+                "quantity" => $product["quantity"]
             ]);
         }
 

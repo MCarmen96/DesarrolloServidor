@@ -11,22 +11,21 @@ return new class extends Migration
      */
     public function up(): void
     {
-        //
-        Schema::create('orders', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('user_id')->constrained();
-            $table->string('status',200);
-            $table->decimal('total',10,2);
+        Schema::create('products', function (Blueprint $table) {
+            $table->id(); 
+            $table->string('name', 100);
+            $table->text('description')->nullable();
+            $table->decimal('price', 10, 2);
+            $table->string('image',100)->nullable(); // BYTEA en PostgreSQL
             $table->timestamps();
-
         });
     }
+
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        //
-        Schema::dropIfExists('orders');
+        Schema::dropIfExists('products');
     }
 };

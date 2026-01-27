@@ -11,17 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        //
-        Schema::create('order_items', function (Blueprint $table) {
+        Schema::create('offers', function (Blueprint $table) {
             $table->id();
-            //RECUERDA QUE SE SOLO SE INDICA LA FOREING KEY YA QUE LA PRIMARY KEY COGE EL ID POR DEFECTO
-            $table->foreignId('order_id')->constrained();
-            $table->foreignId('product_id')->constrained();
-            $table->integer('quantity');
-            $table->decimal('unit_price');
+            $table->date('date_delivery');
+            $table->string('time_delivery');
             $table->timestamps();
-
-
         });
     }
 
@@ -30,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+        Schema::dropIfExists('offers');
     }
 };

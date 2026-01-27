@@ -18,7 +18,7 @@
                             <p class="card-text text-muted small">{{$dish->description}}</p>
                             <ul class="list-unstyled">
                                 <li><strong>Precio:</strong> {{$dish->price}} €</li>
-                                <li><strong>Fecha:</strong> {{$dish->date}}</li>
+
                             </ul>
                             @auth
                                 <form action="{{route('cart.add', $dish->id)}}" method="POST" class="mt-2">

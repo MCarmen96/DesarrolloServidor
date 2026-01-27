@@ -6,11 +6,17 @@ use Illuminate\Database\Eloquent\Model;
 
 class Offer extends Model
 {
-    //
-    protected $fillable = ['date','time','product_id'];
+    protected $fillable = [
+        'date_delivery',
+        'time_delivery',
+    ];
 
-    public function products() {
-        
-        return $this->belongsToMany(Product::class);
+    protected $casts = [
+        'date_delivery' => 'date',
+    ];
+
+    public function productsOffer()
+    {
+        return $this->hasMany(ProductOffer::class);
     }
 }

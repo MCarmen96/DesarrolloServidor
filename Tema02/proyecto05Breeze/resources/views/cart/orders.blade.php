@@ -17,9 +17,7 @@
                                     <strong>Pedido #{{ $order->id }}</strong>
                                     <span class="text-muted ms-3 small">{{ $order->created_at->format('d/m/Y H:i') }}</span>
                                 </span>
-                                <span class="badge {{ $order->status == 'pendiente' ? 'bg-warning' : 'bg-success' }} text-uppercase">
-                                    {{ $order->status }}
-                                </span>
+                
                                 <span class="fw-bold text-success">{{ number_format($order->total, 2) }} €</span>
                             </div>
                         </button>

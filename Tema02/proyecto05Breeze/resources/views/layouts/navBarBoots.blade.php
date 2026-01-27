@@ -11,16 +11,40 @@
                     {{-- menu ADMIN --}}
                     @if(Auth::user()->isAdmin())
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="{{ route('admin.products.index') }}">
-                            Productos
-                        </a>
+                            <a class="nav-link active" aria-current="page" href="{{ route('home') }}">
+                            Home
+                            </a>
                     </li>
 
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="{{ route('admin.products.create') }}">
-                            Registrar Producto
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" aria-current="page" data-bs-toggle="dropdown" href="{{ route('admin.products.index') }}">
+                            Productos
                         </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a class="nav-link " aria-current="page"  href="{{ route('admin.products.index') }}">
+                                    Listado Productos
+                                </a>
+                            </li>
+                        </ul>
+
                     </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" aria-current="page" data-bs-toggle="dropdown" href="{{ route('admin.products.index') }}">
+                            Ofertas
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a class="nav-link " aria-current="page"  href="{{ route('admin.offers.index') }}">
+                                    Listado Ofertas
+                                </a>
+                            </li>
+                        </ul>
+
+                    </li>
+
+
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             {{ Auth::user()->name }}

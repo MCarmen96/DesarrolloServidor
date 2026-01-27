@@ -6,16 +6,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
-    //
-    protected $fillable = ["name", "description", "price", "image"];
+    protected $fillable = [
+        'name',
+        'description',
+        'price',
+        'image'
+    ];
 
-    public function order_items()
-    {      //un producto puede estar en muchos detalles de pedido
-        return $this->hasMany(Order_Item::class);
-    }
-
-    public function offers()
+    public function productsOffer()
     {
-        return $this->belongsToMany(Offer::class);
+        return $this->hasMany(ProductOffer::class);
     }
 }

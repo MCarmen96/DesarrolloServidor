@@ -1,6 +1,7 @@
 <?php
 
-use App\Http\Controllers\AdminController;
+use App\Http\Controllers\Auth\admin\AdminControllerOffers;
+use App\Http\Controllers\Auth\admin\AdminControllerProducts;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
@@ -34,7 +35,8 @@ Route::middleware('auth')->group(function () {
 Route::middleware(['auth','isAdmin'])->prefix('admin')->name('admin.')->group(function(){
 
     //Route::get('/products/index',[AdminController::class,'index'])->name('products.index');
-    Route::resource('products',AdminController::class);
+    Route::resource('products',AdminControllerProducts::class);
+    Route::resource('offers',AdminControllerOffers::class);
     // resource crea automáticamente estas 7 rutas RESTful que se corresponden con las operaciones CRUD típicas.
 
 });
