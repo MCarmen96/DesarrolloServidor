@@ -55,8 +55,11 @@ class AdminControllerProducts extends Controller{
             $product->image=$rutaImage;
             $product->save();
 
+            return redirect()->route("admin.products.index")->with("success","Producto creado con exito");
+
         }catch(\Exception $e){
             error_log($e->getMessage());
+            
         }
 
 
@@ -68,7 +71,7 @@ class AdminControllerProducts extends Controller{
         //     "image"=>$request["image"]
         // ]);
 
-        return redirect()->route("admin.products.index")->with("success","Producto creado con exito");
+
 
     }
 

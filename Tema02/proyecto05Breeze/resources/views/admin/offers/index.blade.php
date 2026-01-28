@@ -9,7 +9,7 @@
     @endif
     <div class="card shadow-sm">
         <div class="card-header bg-white">
-            <h3 class="text-success mb-0">ofertas</h3>
+            <h3 class="text-success mb-0">Ofertas</h3>
             <form action="{{route('admin.offers.create')}}" method="GET">
                 @csrf
                 <button class="btn btn-primary btn-sm">+ Crear Ofertas</button>

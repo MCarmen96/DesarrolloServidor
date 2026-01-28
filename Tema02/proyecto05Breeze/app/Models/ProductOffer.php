@@ -8,8 +8,7 @@ class ProductOffer extends Model
 {
     protected $fillable = [
         'offer_id',
-        'product_id',
-        'price'
+        'product_id'
     ];
 
     public function offer()
