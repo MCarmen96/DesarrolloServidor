@@ -22,35 +22,39 @@
                 <table class="table table-hover align-middle">
                     <thead class="table-light">
                         <tr>
-                            <th>Imagen</th>
+                            <th>Fecha de entrega</th>
+                            <th>Hora de entrega</th>
                             <th>Producto</th>
+                            <th>Foto</th>
+                            <th>Info</th>
                             <th>Precio</th>
+
                             <th class="text-center">Eliminar</th>
-                            <th class="text-center">Editar</th>
+
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($dishes as $dish)
+
+                        @foreach($offers as $offer)
                         <tr>
-                            <td>
-                                <img src="{{asset($dish->image)}}" width="80" class="rounded shadow-sm">
-                            </td>
-                            <td class="fw-bold">{{ $dish->name}}</td>
-                            <td>{{$dish->price}} €</td>
+                            //dd($offer)
+                            <td class="fw-bold">{{ $offer->date_delivery->format('d/m/Y')}}</td>
+                            <td class="fw-bold">{{ $offer->time_delivery}}</td>
 
+                            @foreach($offer->productsOffer as $prod )
+                                <td>{{$prod->product->name}}</td>
+                                <td>
+                                    <img src="{{asset($prod->product->image)}}" width="80" class="rounded shadow-sm">
+                                </td>
+                                <td>{{$prod->product->description}}</td>
+                                <td>{{$prod->product->price}} €</td>
 
+                            @endforeach
                             <td class="text-center">
-                                <form action="" method="POST">
+                                <form action="{{route('admin.offers.destroy')}}" method="POST">
                                     @csrf
                                     @method('DELETE')
                                     <button class="btn btn-outline-danger btn-sm">Eliminar</button>
-                                </form>
-                            </td>
-                            <td class="text-center">
-                                <form action="" method="POST">
-                                    @csrf
-                                    @method('PUT')
-                                    <button class="btn btn-outline-primary btn-sm">Edit</button>
                                 </form>
                             </td>
                         </tr>

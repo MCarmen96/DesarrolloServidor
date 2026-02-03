@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Product;
 use App\Models\Order;
+use App\Models\ProductOffer;
+use App\Models\Offer;
 use App\Models\ProductOrder;
 use Illuminate\Http\Request;
 
@@ -11,17 +13,61 @@ use Illuminate\Http\Request;
 class CartController extends Controller
 {
     //
+    /*
+            cart = [
+                offer_id => [
+                    productOffer_id => quantity
+                ]
+            ];
+
+            cart = [
+                10 => [ // offer_id = 10
+                    101 => 2, // productOffer_id 101, cantidad 2
+                    102 => 1
+                ],
+                12 => [ // offer_id = 12
+                    150 => 1,
+                    151 => 3
+                ]
+            ];
+
+
+    */
+
     public function index()
     {
         $cart = session()->get('cart', []);
-        return view('cart.index', compact('cart'));
+
+        $offersIds=array_keys($cart);//conseguimos un array de id de ofertas y productos-oferta, este sin duplicados
+        //dd($offersIds);
+        $productOffersIds=[];
+
+        foreach($cart as $offId=>$items){
+
+            $productOffersIds=array_merge($productOffersIds,array_keys($items));
+        }
+        $productOffersIds=array_unique($productOffersIds);
+
+        //dd($productOffersIds);
+        /*
+                The keyBy method keys the collection by the given key.
+                If multiple items have the same key, only the last one will appear in the new collection:
+        */
+        //dd($cart);
+        $offersById=Offer::whereIn('id',$offersIds)->get(['id','date_delivery','time_delivery'])->keyBy('id');
+
+        $productOffersById=ProductOffer::with('product') ->whereIn ('id',$productOffersIds) ->get(['id','offer_id','product_id'])->keyBy('id');
+
+        return view('cart.index',compact('cart','offerById','productOffersById'));
     }
 
 
     public function add(Request $request, $id)
     {
         $product = Product::findOrFail($id);
+
         $cart = session()->get('cart', []);
+        
         $idProduct = (int)$id;
         // si el producto ya esta en el carrito, incrementamos su cantidad
         if (isset($cart[$idProduct])) {
@@ -45,6 +91,7 @@ class CartController extends Controller
     public function remove($id)
     {
         $cart = session()->get('cart', []);
+
         $idProduct = (int)$id;
         //si el producto existe en el carrito lo eliminamos
         if (isset($cart[$idProduct])) {
@@ -77,7 +124,7 @@ class CartController extends Controller
     {
         $cart = session()->get('cart', []);
         $idProduct = (int)$id;
-        
+
         if (isset($cart[$idProduct]) && $cart[$idProduct]['quantity'] > 1) {
             $cart[$idProduct]['quantity']--;
             session()->put('cart', $cart);

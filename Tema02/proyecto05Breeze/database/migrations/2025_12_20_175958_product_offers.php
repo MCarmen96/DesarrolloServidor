@@ -14,7 +14,7 @@ return new class extends Migration {
             $table->foreignId('offer_id')->constrained('offers')->cascadeOnDelete();
             $table->foreignId('product_id')->constrained('products')->cascadeOnDelete();
             $table->unique(['offer_id', 'product_id']);// Evita duplicados del mismo producto en la misma oferta
-            $table->decimal('price', 10, 2);
+
             $table->timestamps();
         });
     }

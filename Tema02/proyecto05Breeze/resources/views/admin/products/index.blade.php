@@ -47,7 +47,7 @@
                                 </form>
                             </td>
                             <td class="text-center">
-                                <form action="" method="POST">
+                                <form action="{{route('admin.products.edit')}}" method="POST">
                                     @csrf
                                     @method('PUT')
                                     <button class="btn btn-outline-primary btn-sm">Edit</button>

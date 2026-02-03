@@ -84,6 +84,9 @@
                             </ul>
                         </li>
                     @endif
+                <li class="nav-item ms-lg-auto">
+                    <a class="nav-link" href="{{ route('cart.index') }}">Carrito</a>
+                </li>
                 @endauth
 
 

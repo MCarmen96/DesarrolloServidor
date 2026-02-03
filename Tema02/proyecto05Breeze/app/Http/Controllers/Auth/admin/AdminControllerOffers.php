@@ -88,6 +88,7 @@ class AdminControllerOffers extends Controller
     public function show(string $id)
     {
         //
+
     }
 
     /**
@@ -96,6 +97,13 @@ class AdminControllerOffers extends Controller
     public function edit(string $id)
     {
         //
+        try{
+            $offer=Offer::find($id);
+            $dishes = Product::all();
+            return view("admin.offers.edit", compact ("offer","dishes") );
+        }catch(\Exception $e){
+            return back()->withErrors(['error' => 'Fallo al editar la oferta: ' . $e->getMessage()]);
+        }
     }
 
     /**
@@ -112,5 +120,14 @@ class AdminControllerOffers extends Controller
     public function destroy(string $id)
     {
         //
+        try{
+            
+            $offer=Offer::find($id);
+            $offer->delete();
+            return redirect()->route("admin.offers.index")->with('success','Oferta Eliminada');
+
+        }catch(\Exception $e){
+                return back()->withErrors(['error' => 'Fallo al eliminar oferta: ' . $e->getMessage()]);
+        }
     }
 }

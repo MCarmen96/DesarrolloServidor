@@ -59,7 +59,7 @@ class AdminControllerProducts extends Controller{
 
         }catch(\Exception $e){
             error_log($e->getMessage());
-            
+
         }
 
 
@@ -89,6 +89,13 @@ class AdminControllerProducts extends Controller{
     public function edit(string $id)
     {
         //
+        try{
+            $product=Product::find($id);
+            return view("admin.product.edit",compact("product"));
+        }catch(\Exception $e){
+            return back()->withErrors(['error' => 'Fallo al mostrar la ventana de edicion: ' . $e->getMessage()]);
+        }
+
     }
 
     /**
