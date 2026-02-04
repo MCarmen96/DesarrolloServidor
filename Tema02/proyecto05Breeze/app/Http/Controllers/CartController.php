@@ -58,7 +58,7 @@ class CartController extends Controller
 
         $productOffersById=ProductOffer::with('product') ->whereIn ('id',$productOffersIds) ->get(['id','offer_id','product_id'])->keyBy('id');
 
-        return view('cart.index',compact('cart','offerById','productOffersById'));
+        return view('cart.index',compact('cart','offersById','productOffersById'));
     }
 
 
@@ -67,7 +67,7 @@ class CartController extends Controller
         $product = Product::findOrFail($id);
 
         $cart = session()->get('cart', []);
-        
+
         $idProduct = (int)$id;
         // si el producto ya esta en el carrito, incrementamos su cantidad
         if (isset($cart[$idProduct])) {

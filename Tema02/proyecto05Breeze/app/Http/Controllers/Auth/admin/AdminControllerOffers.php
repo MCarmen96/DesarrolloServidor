@@ -121,8 +121,8 @@ class AdminControllerOffers extends Controller
     {
         //
         try{
-            
-            $offer=Offer::find($id);
+
+            $offer=Offer::findOrFail($id);
             $offer->delete();
             return redirect()->route("admin.offers.index")->with('success','Oferta Eliminada');
 

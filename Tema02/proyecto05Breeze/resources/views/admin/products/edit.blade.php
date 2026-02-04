@@ -8,23 +8,23 @@
         <hr class="w-25">
     </div>
 
-    <form action="{{ route('admin.products.update') }}" method="POST" enctype="multipart/form-data" class="row g-4">
+    <form action="" method="PUT" enctype="multipart/form-data" class="row g-4">
 
-    @csrf
+        @csrf
         {{-- Lado izquierdo: Información --}}
         <div class="col-lg-8">
             <div class="p-4 bg-white rounded-4 shadow-sm border">
                 <div class="mb-4">
                     <label class="form-label small text-uppercase fw-bold text-muted">Nombre del plato</label>
                     <input type="text" name="name" class="form-control form-control-lg border-0 bg-light @error('name') is-invalid @enderror"
-                           placeholder="Ej. Solomillo al Whisky" style="border-radius: 8px;" value="{{$product->name}}">
+                        placeholder="Ej. Solomillo al Whisky" style="border-radius: 8px;" value="{{$product->name}}">
                     @error('name') <div class="invalid-feedback">{{ $message }}</div> @enderror
                 </div>
 
                 <div class="mb-0">
                     <label class="form-label small text-uppercase fw-bold text-muted">Descripción del contenido</label>
                     <textarea name="description" rows="8" class="form-control border-0 bg-light @error('description') is-invalid @enderror"
-                              placeholder="Detalla los ingredientes..." style="border-radius: 8px;" value="{{$product->description}}"></textarea>
+                        placeholder="Detalla los ingredientes..." style="border-radius: 8px;">{{ old('description', $product->description) }}</textarea>
                     @error('description') <div class="invalid-feedback">{{ $message }}</div> @enderror
                 </div>
             </div>
@@ -37,17 +37,29 @@
                     <label class="form-label small text-uppercase fw-bold text-muted">Precio</label>
                     <div class="input-group">
                         <input type="number" step="0.01" name="price" class="form-control form-control-lg border-0 bg-light @error('price') is-invalid @enderror"
-                               placeholder="0.00"  style="border-radius: 8px 0 0 8px;" value="{{$product->price}}">
+                            placeholder="0.00" style="border-radius: 8px 0 0 8px;" value="{{$product->price}}">
                         <span class="input-group-text border-0 bg-light text-muted" style="border-radius: 0 8px 8px 0;">€</span>
                     </div>
                     @error('price') <div class="text-danger small mt-1">{{ $message }}</div> @enderror
                 </div>
+                <div class="mb-3">
+                    <label class="form-label d-block">Imagen Actual</label>
 
-                <div class="mb-0">
-                    <label class="form-label small text-uppercase fw-bold text-muted">Imagen</label>
-                    <input type="file" name="image" class="form-control border-0 bg-light @error('image') is-invalid @enderror" style="border-radius: 8px;">
-                    @error('image') <div class="text-danger small mt-1">{{ $message }}</div> @enderror
+                    @if($product->image)
+                    {{-- Mostramos la imagen que ya existe --}}
+                    <div class="mb-2">
+                        <img src="{{ asset($product->image) }}" alt="Imagen actual" class="img-thumbnail" style="max-width: 200px;">
+                    </div>
+                    @else
+                    <p class="text-muted small">Sin imagen registrada</p>
+                    @endif
+
+                    {{-- Input para subir la nueva imagen --}}
+                    <input type="file" name="image" class="form-control @error('image') is-invalid @enderror">
+                    <div class="form-text">Deja este campo vacío si no quieres cambiar la imagen actual.</div>
+                    @error('image') <div class="invalid-feedback">{{ $message }}</div> @enderror
                 </div>
+
             </div>
 
             <div class="d-grid gap-2">

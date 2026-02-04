@@ -2,9 +2,17 @@
 
 @section('content')
 <div class="container mt-5">
-    @if(session('success'))
-    <div class="alert alert-success mt-3">
-        {{ session('success') }}
+
+@if(session('error'))
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <strong>¡Error!</strong> {{ session('error') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+@endif
+    @if(session('exito'))
+    <div class="alert alert-success mt-3 alert-dismissible fade show" role="alert" >
+        {{ session('exito') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
     @endif
     <div class="card shadow-sm">
@@ -40,18 +48,14 @@
 
 
                             <td class="text-center">
-                                <form action="" method="POST">
+                                <form action="{{route('admin.products.destroy',$dish->id)}}" method="POST">
                                     @csrf
                                     @method('DELETE')
                                     <button class="btn btn-outline-danger btn-sm">Eliminar</button>
                                 </form>
                             </td>
                             <td class="text-center">
-                                <form action="{{route('admin.products.edit')}}" method="POST">
-                                    @csrf
-                                    @method('PUT')
-                                    <button class="btn btn-outline-primary btn-sm">Edit</button>
-                                </form>
+                                <a href="{{ route('admin.products.edit', $dish->id) }}" class="btn btn-outline-primary btn-sm">Editar</a>
                             </td>
                         </tr>
                         @endforeach

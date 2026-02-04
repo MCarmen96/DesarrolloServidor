@@ -3,8 +3,9 @@
 @section('content')
 <div class="container mt-5">
     @if(session('success'))
-    <div class="alert alert-success mt-3">
+        <div class="alert alert-success mt-3 alert-dismissible fade show" role="alert" >
         {{ session('success') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
     @endif
     <div class="card shadow-sm">
@@ -37,7 +38,7 @@
 
                         @foreach($offers as $offer)
                         <tr>
-                            //dd($offer)
+
                             <td class="fw-bold">{{ $offer->date_delivery->format('d/m/Y')}}</td>
                             <td class="fw-bold">{{ $offer->time_delivery}}</td>
 
@@ -51,7 +52,7 @@
 
                             @endforeach
                             <td class="text-center">
-                                <form action="{{route('admin.offers.destroy')}}" method="POST">
+                                <form action="{{route('admin.offers.destroy',$offer->id)}}" method="POST">
                                     @csrf
                                     @method('DELETE')
                                     <button class="btn btn-outline-danger btn-sm">Eliminar</button>

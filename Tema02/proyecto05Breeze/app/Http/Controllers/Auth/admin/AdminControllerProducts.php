@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth\admin;
 use App\Http\Controllers\Controller;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\View;
 
 class AdminControllerProducts extends Controller{
     /**
@@ -90,8 +91,8 @@ class AdminControllerProducts extends Controller{
     {
         //
         try{
-            $product=Product::find($id);
-            return view("admin.product.edit",compact("product"));
+            $product=Product::findOrFail($id);
+            return view("admin.products.edit",compact("product"));
         }catch(\Exception $e){
             return back()->withErrors(['error' => 'Fallo al mostrar la ventana de edicion: ' . $e->getMessage()]);
         }
@@ -109,8 +110,16 @@ class AdminControllerProducts extends Controller{
     /**
      * Elimina permanentemente un producto de la base de datos.
      */
-    public function destroy(string $id)
+    public function destroy($id)
     {
         //
+        try{
+            Product::destroy($id);
+            return redirect()->route("admin.products.index")->with("exito","Producto eliminado con exito");
+
+        }catch(\Exception $e){
+            return back()->with("error", "No se pudo eliminar: " . $e->getMessage());
+        }
+
     }
 }
