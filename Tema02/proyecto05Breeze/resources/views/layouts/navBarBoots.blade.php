@@ -91,12 +91,12 @@
 
 
                 @guest
-                <li class="nav-item ms-lg-auto">
-                    <a class="nav-link" href="{{ route('login') }}">Login</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('register') }}">¡Regístrate!</a>
-                </li>
+                    <li class="nav-item ms-lg-auto">
+                        <a class="nav-link" href="{{ route('login') }}">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('register') }}">¡Regístrate!</a>
+                    </li>
                 @endguest
 
             </ul>

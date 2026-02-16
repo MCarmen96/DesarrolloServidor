@@ -37,7 +37,7 @@
                                         <img src="{{ asset($item->product->image) }}" class="card-img-top" style="height: 220px; object-fit: cover;">
 
                                         <div class="position-absolute top-0 start-0 m-3 shadow-sm"
-                                             style="background-color: #a64d79; color: white; padding: 4px 12px; border-radius: 20px; font-weight: bold;">
+                                             style="background-color: #f7af3b; color: white; padding: 4px 12px; border-radius: 20px; font-weight: bold;">
                                             {{ number_format($item->product->price, 2) }}€
                                         </div>
                                     </div>

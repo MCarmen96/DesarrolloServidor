@@ -3,9 +3,9 @@
 @section('content')
 <div class="container mt-5">
     @if(session('success'))
-    <div class="alert alert-success mt-3">
-        {{ session('success') }}
-    </div>
+        <div class="alert alert-success mt-3">
+            {{ session('success') }}
+        </div>
     @endif
     <div class="card shadow-sm">
         <div class="card-header bg-white">
@@ -14,7 +14,7 @@
 
         <div class="card-body">
             @if(empty($cart))
-
+                {{-- si el carrito esta vacio --}}
                 <div class="alert alert-success text-center py-4" role="alert">
                     <h4 class="alert-heading">Tu carrito está vacío</h4>
                     <p class="mb-0">¡Echa un vistazo a nuestros menús para añadir algo rico!</p>
@@ -39,7 +39,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            {{--  VARIABLES PHP PARA CARRITO --}}
+                            {{-- VARIABLES PHP PARA CARRITO --}}
                             @php $totalAcumulado = 0; @endphp
 
 
@@ -50,58 +50,60 @@
                                     $subtotal=0;
                                 @endphp
 
-                            <tr>
-                                <td class="fw-bold">>{{$offer->date_delivery->format('d/m/Y')}}</td>
+                                <tr>
+                                    <td class="fw-bold">>{{$offer->date_delivery->format('d/m/Y')}}</td>
 
-                                @foreach($items as $productOfferId=> $qty)
-                                    @php
-                                        $po=$productOfferById[$productOfferId] ?? null;
-                                        $prod=$po->product;
-                                        $lineaTotal=$prod->price*(int)$qty;
-                                        $subtotal+=$lineaTotal;
-                                        $totalAcumulado+=$lineaTotal;
-                                    @endphp
-                                @if($po)
-                                    <td>
-                                        <img src="{{ asset($prod->image) }}" width="80" class="rounded shadow-sm">
-                                    </td>
-                                    <td class="fw-bold">{{ $prod->description }}</td>
-                                    <td class="fw-bold">{{ $prod->name }}</td>
-                                    <td>{{ number_format($prod->price, 2) }} €</td>
+                                    @foreach($items as $productOfferId=> $qty)
+                                        @php
+                                            $po=$productOfferById[$productOfferId] ?? null;
+                                            $prod=$po->product;
+                                            $lineaTotal=$prod->price*(int)$qty;
+                                            $subtotal+=$lineaTotal;
+                                            $totalAcumulado+=$lineaTotal;
+                                        @endphp
+                                        @if($prod)
+                                            <td>
+                                                <img src="{{ asset($prod->image) }}" width="80" class="rounded shadow-sm">
+                                            </td>
+                                            <td class="fw-bold">{{ $prod->description }}</td>
+                                            <td class="fw-bold">{{ $prod->name }}</td>
+                                            <td>{{ number_format($prod->price, 2) }} €</td>
 
-                                    <td class="text-center" style="width: 150px;">
-                                        <div class="input-group input-group-sm justify-content-center">
+                                            <td class="text-center" style="width: 150px;">
+                                                <div class="input-group input-group-sm justify-content-center">
 
-                                            <form action="{{ route('cart.decrease', $id) }}" method="POST">
-                                                @csrf
-                                                @method('PUT')
-                                                <button class="btn btn-outline-success px-2 py-0" type="submit"
-                                                    {{ $items['quantity'] <= 1 ? 'disabled' : '' }}>
-                                                    -
-                                                </button>
-                                            </form>
+                                                    <form action="{{ route('cart.decrease', $id) }}" method="POST">
+                                                        @csrf
+                                                        @method('PUT')
+                                                        <button class="btn btn-outline-success px-2 py-0" type="submit"
+                                                            {{ $items['quantity'] <= 1 ? 'disabled' : '' }}>
+                                                            -
+                                                        </button>
+                                                    </form>
 
-                                            <span class="px-3 fw-bold align-self-center">{{ $items['quantity'] }}</span>
+                                                    <span class="px-3 fw-bold align-self-center">{{ $items['quantity'] }}</span>
 
-                                            <form action="{{ route('cart.increase', $id) }}" method="POST">
-                                                @csrf
-                                                @method('PUT')
-                                                <button class="btn btn-outline-success px-2 py-0" type="submit">
-                                                    +
-                                                </button>
-                                            </form>
+                                                    <form action="{{ route('cart.increase', $id) }}" method="POST">
+                                                        @csrf
+                                                        @method('PUT')
+                                                        <button class="btn btn-outline-success px-2 py-0" type="submit">
+                                                            +
+                                                        </button>
+                                                    </form>
 
-                                        </div>
-                                    </td>
-                                    <td class="fw-bold text-success">{{ number_format($subtotal, 2) }} €</td>
-                                    <td class="text-center">
-                                        <form action="{{ route('cart.remove', $id) }}" method="POST">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button class="btn btn-outline-danger btn-sm">Eliminar</button>
-                                        </form>
-                                    </td>
-                            </tr>
+                                                </div>
+                                            </td>
+                                            <td class="fw-bold text-success">{{ number_format($subtotal, 2) }} €</td>
+                                            <td class="text-center">
+                                                <form action="{{ route('cart.remove', $id) }}" method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button class="btn btn-outline-danger btn-sm">Eliminar</button>
+                                                </form>
+                                            </td>
+                                        @endif
+                                    @endforeach
+                                    </tr>
                             @endforeach
                         </tbody>
                         <tfoot>
@@ -114,6 +116,7 @@
                 </div>
 
                 <div class="d-flex justify-content-between mt-4">
+
                     {{-- VACIAR CARRITO --}}
                     <form action="{{ route('cart.clear') }}" method="POST">
                         @csrf
@@ -122,6 +125,7 @@
                             Vaciar Carrito
                         </button>
                     </form>
+
                     <div>
                         <a href="{{ url('/') }}" class="btn btn-primary fw-bold me-2">Seguir comprando</a>
                         <form action="{{ route('cart.order') }}" method="POST" class="d-inline">

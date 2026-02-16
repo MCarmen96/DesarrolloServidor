@@ -12,7 +12,6 @@ function pagina1() {
                 nombres.push(element.name);
             });
 
-            console.log(nombres)
 
 
         }).catch(error => {
@@ -33,7 +32,7 @@ function pagina2(){
                 nombres.push(element.name);
             });
 
-            console.log(nombres)
+    
 
 
         }).catch(error => {
@@ -45,6 +44,8 @@ function pagina2(){
 
 function mostrar(funct1,funct2){
     
+    
+
 }
 
 
