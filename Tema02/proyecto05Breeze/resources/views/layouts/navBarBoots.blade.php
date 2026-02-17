@@ -60,6 +60,7 @@
                             </li>
                         </ul>
                     </li>
+                    <li><a class="dropdown-item" href="{{ route('cart.orders') }}">Pedidos</a></li>
                     @else
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="{{ route('home') }}">
@@ -83,6 +84,7 @@
                                 </li>
                             </ul>
                         </li>
+
                     @endif
                 <li class="nav-item ms-lg-auto">
                     <a class="nav-link" href="{{ route('cart.index') }}">Carrito</a>

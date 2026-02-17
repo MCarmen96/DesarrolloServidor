@@ -7,16 +7,16 @@
     {{-- Pestañas de Fechas (Botones de arriba) --}}
     <ul class="nav nav-pills justify-content-center mb-5" id="pills-tab" role="tablist">
         @foreach($offersByDate as $date => $offers)
-    <li class="nav-item" role="presentation">
-        <button class="nav-link {{ $loop->first ? 'active' : '' }} mx-2 shadow-sm btn-fecha"
-                id="tab-{{ $loop->index }}"
-                data-bs-toggle="pill"
-                data-bs-target="#content-{{ $loop->index }}"
-                type="button" role="tab">
-            {{ \Carbon\Carbon::parse($date)->translatedFormat('d F') }}
-        </button>
-    </li>
-@endforeach
+            <li class="nav-item" role="presentation">
+                <button class="nav-link {{ $loop->first ? 'active' : '' }} mx-2 shadow-sm btn-fecha"
+                        id="tab-{{ $loop->index }}"
+                        data-bs-toggle="pill"
+                        data-bs-target="#content-{{ $loop->index }}"
+                        type="button" role="tab">
+                    {{ \Carbon\Carbon::parse($date)->translatedFormat('d F') }}
+                </button>
+            </li>
+        @endforeach
     </ul>
 
     {{-- Contenido de las Pestañas (Las Cards) --}}
@@ -29,7 +29,8 @@
                 <div class="row g-4">
                     @foreach($offers as $offer)
                         {{-- Entramos en la tabla intermedia 'product_offers' --}}
-                        @foreach($offer->productsOffer as $item){{-- item ya puede acceder a productos --}}
+                        @foreach($offer->productsOffer as $item)
+
                             <div class="col-md-6 col-lg-4">
                                 <div class="card h-100 border-0 shadow-sm" style="border-radius: 15px; overflow: hidden;">
                                     <div class="position-relative">
@@ -46,7 +47,7 @@
                                         <p class="text-muted mb-3" style="font-size: 0.85rem;">{{ $item->product->description }}</p>
 
                                         @auth
-                                            <form action="{{ route('cart.add', $item->product->id) }}" method="POST">
+                                            <form action="{{ route('cart.add', $item->id) }}" method="POST">
                                                 @csrf
                                                 <button type="submit" class="btn btn-success btn-sm px-3" style="background-color: #5ba564; border: none;">
                                                     Añadir al carrito
