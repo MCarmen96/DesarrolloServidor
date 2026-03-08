@@ -1,0 +1,12 @@
+GET http://127.0.0.1:3000/api/datos
+
+
+###
+
+POST http://127.0.0.1:3000/api/enviarDatos
+Content-Type: application/json
+
+{
+    "nombre":"cafe",
+    "descripcion":"Cafe de Colombia"
+}

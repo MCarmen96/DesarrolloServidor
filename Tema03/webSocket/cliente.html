@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WEBSOCKET CLIENTE</title>
+</head>
+<body>
+    <h1>---CLIENTE WEBSOCKET---</h1>
+    <form action="" id="messagesForm">
+        <input type="text" id="messagesInput">
+        <button type="submit">Send</button>
+    </form>
+    <div id="messages"></div>
+
+
+    <script>
+        const messages=document.getElementById('messages');
+        const messagesForm=document.getElementById('messagesForm');
+        const messagesInput=document.getElementById('messagesInput');
+
+        const socket=new WebSocket('ws://localhost:8080');
+
+        socket.onopen=function(event){
+            console.log("Conectado en el servidro websocket");
+            socket.send('Hola servidor websocket');
+        }
+
+        messagesForm.addEventListener('submit',(event)=>{
+            event.preventDefault();
+            const message=messagesInput.value;
+            socket.send(message);
+            messagesInput.value='';
+        });
+
+        socket.onmessage=function(event){
+            const newMessage=document.createElement('div');
+            newMessage.textContent=`Mensaje del servidor: ${event.data}`;
+            messages.appendChild(newMessage);    
+        }
+
+        socket.onerror=function(event){
+            console.error('ERROR EN LA CONEXION WEB SOCKET ',event);
+        }
+
+        socket.onclose=function(event){
+            console.log("conexion cerrada: ",event)
+        }
+
+    </script>
+</body>
+</html>

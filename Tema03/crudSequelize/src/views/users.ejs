@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Usuarios</title>
+    <link rel="stylesheet" href="/public/css/styles.css">
+</head>
+<body>
+    <h1>Lista de Usuarios</h1>
+    <ul>
+        <% users.forEach(user=> { %>
+            <li>
+                <%= user.nombre %>
+            </li>
+            <% }) %>
+    </ul>
+    <a href="/">Volver</a>
+</body>
+</html>

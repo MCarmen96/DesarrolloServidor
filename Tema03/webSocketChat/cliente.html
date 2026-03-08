@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WEBSOCKET CLIENTE</title>
+</head>
+
+<body>
+    <h1>---CLIENTE WEBSOCKET---</h1>
+    <form action="" id="messagesForm">
+        <label for="">Nombre</label>
+        <input type="text" id="messagesInput">
+        <button type="submit">Send</button>
+    </form>
+    <hr>
+    <H2>--CHAT--</H2>
+    <form action="" id="chat">
+        <input type="text" id="chatInput"><br>
+        <button id="chatButton">send</button>
+    </form>
+    <div id="messages">
+
+
+    </div>
+
+
+    <script>
+        const messages = document.getElementById('messages');
+        const messagesForm = document.getElementById('messagesForm');
+        const messagesInput = document.getElementById('messagesInput');
+
+        const chatForm = document.getElementById('chat');
+        const chatButton = document.getElementById('chatButton');
+        const chatInput = document.getElementById('chatInput');
+
+        const socket = new WebSocket('ws://localhost:8080');
+
+        socket.onopen = function (event) {
+            console.log("Conectado en el servidro websocket");
+            //socket.send('Hola servidor websocket');
+        }
+
+        //envio del nombre al servidor
+        messagesForm.addEventListener('submit', (event) => {
+            event.preventDefault();
+            const nombreCliente = messagesInput.value;
+            socket.send("Nombre:" + nombreCliente);
+            //messagesInput.value='';
+        });
+
+        // envio mensaje del chat al servidor
+        chatForm.addEventListener('submit', (event) => {
+            event.preventDefault();
+            const mensajeChat = chatInput.value;
+            socket.send(mensajeChat);
+            chatInput.value = '';
+        })
+
+        //recibe el mensaje del servidor
+        socket.onmessage = function (event) {
+            const newMessage = document.createElement('div');
+            newMessage.textContent = event.data;
+            messages.appendChild(newMessage);
+        }
+
+
+        socket.onerror = function (event) {
+            console.error('ERROR EN LA CONEXION WEB SOCKET ', event);
+        }
+
+        socket.onclose = function (event) {
+            console.log("conexion cerrada: ", event)
+        }
+
+    </script>
+</body>
+
+</html>

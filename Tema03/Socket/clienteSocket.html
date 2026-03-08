@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>CLIENTE SOCKET.IO</h1>
+
+    <input type="text" name="" id="mensajeInput">
+    <button id="sendButton">SEND</button>
+    <script src="servidor.io.js"></script>
+
+    <script>
+        const socket=io();// conectamos al servidor
+        // le indico que evento tiene que susbcribirse al ahcer click el cliente
+        document.getElementById('message').onclick=function(){
+            const mensaje=document.getElementById('mensajeInput').value;
+            socket.emit('mensaje',mensaje);//enviamos el evento 'mensaje'
+        }
+        socket.on('respuesta',(data)=>{
+            console.log("respuesta servidor: ",data);
+        })
+    </script>
+</body>
+</html>
